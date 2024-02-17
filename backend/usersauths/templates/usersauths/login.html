@@ -1,0 +1,48 @@
+{% extends "layout/base.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'usersauths/fichier/css/bootstrap.min.css'%}">
+{% endblock styles %}
+{% block content %}
+{% include "partial/navbar.html" %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="container mb-3 mt-3 p-4">
+        <div class="row align-itemsy-center justify-content-between">
+            <div class="col-md-6 border border-2 bg-gray shadow-sm w-50 d-flex flex-column align-items-center rounded-3 ">
+                <img class='h-100 w-100' src="{% static 'usersauths/assets/image/social-media-5187243_1280.png' %}" alt="" >
+            </div>
+            <div class="col-md-6 m-0">
+                <h2 class="text-black mx-4 h1">Login on clone notion</h2>
+                <p class="mx-4"> Don't have an Account with clone notion? <a href="{% url "usersauths:register" %}">Create your Account </a></p>
+                <div class="container d-flex flex-column p-4">
+                    <div class="form-group mb-3 rounded-2 h-100">
+                        <input type="email" name="email" required id="email" class="form-control p-3" autocomplete="off" placeholder="Email">
+                    </div>
+                    <div class="form-group mb-2 rounded-2 h-100">
+                        <input type="password" name="password" required id="password" class="form-control p-3" autocomplete="off" placeholder="Password">
+                    </div>
+                    <div class="form-group d-flex justify-content-between mt-2">
+                        <div class="boxOne">
+                            <input type="checkbox" name="checkbox" required id="checkbox" class="form-checked" autocomplete="off" value="accept"> <span class="mx-1">Accept the condition </span>
+                        </div>
+                        <div class="boxTwo">
+                            <a href="#" class="text-black text-decoration-none">Password forgot ?</a>
+                        </div>
+                        
+                    </div>
+
+                    
+                </div>
+                <button type="submit" class="btn btn-lg btn-white  border border-2 btn-outline-success mx-4 w-50">Login</button>
+            </div>
+            
+        </div>
+
+    </div>
+</form>
+<script src="{% static 'usersauths/fichier/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock content %}

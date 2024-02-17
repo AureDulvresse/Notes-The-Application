@@ -1,0 +1,3 @@
+// au niveau de models je pense a modifier legrement certaines approches 
+category sera en ralatyiona avec note car c'est par la que on peut voir ces differentes category et ces differentes notes 
+Essaayer de donner la possibilite a un utiisateur d'associe sa note a une image quelconque ....
