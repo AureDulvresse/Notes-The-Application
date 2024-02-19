@@ -4,5 +4,6 @@ from . import views
 app_name = 'api'
 
 urlpatterns = [
-    path('notes/', views.NotesViews, name='getNotes'),
+    path('notes/', views.NotesViews, name='Notes'),
+    path('notes/<str:pk>', views.NotesViews, name="Notes"),
 ]

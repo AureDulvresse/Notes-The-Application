@@ -40,7 +40,8 @@ class Category(models.Model):
       
 class Notes(models.Model):
     content = models.TextField(max_length=1000)
-    is_task = models.BooleanField()
+    is_task = models.BooleanField(default = False)
+    status = models.BooleanField(default = False)
     category = models.ForeignKey(Category, on_delete = models.CASCADE , related_name="fk_NoteCategory")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now = True)

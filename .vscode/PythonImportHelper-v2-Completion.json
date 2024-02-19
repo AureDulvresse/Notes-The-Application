@@ -100,6 +100,22 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -297,6 +313,15 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.apps.migrations.0003_notes_status_alter_notes_is_task",
+        "description": "backend.apps.migrations.0003_notes_status_alter_notes_is_task",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('apps', '0002_alter_user_profile'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='notes',\n            name='status',\n            field=models.BooleanField(default=False),\n        ),",
+        "detail": "backend.apps.migrations.0003_notes_status_alter_notes_is_task",
+        "documentation": {}
+    },
+    {
         "label": "CategoryAdmin",
         "kind": 6,
         "importPath": "backend.apps.admin",
@@ -355,7 +380,7 @@
         "kind": 6,
         "importPath": "backend.apps.models",
         "description": "backend.apps.models",
-        "peekOfCode": "class Notes(models.Model):\n    content = models.TextField(max_length=1000)\n    is_task = models.BooleanField()\n    category = models.ForeignKey(Category, on_delete = models.CASCADE , related_name=\"fk_NoteCategory\")\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now = True)\n    class Meta:\n        verbose_name = 'Note'\n        verbose_name_plural = 'Notes'\n    def __str__(self):",
+        "peekOfCode": "class Notes(models.Model):\n    content = models.TextField(max_length=1000)\n    is_task = models.BooleanField(default = False)\n    status = models.BooleanField(default = False)\n    category = models.ForeignKey(Category, on_delete = models.CASCADE , related_name=\"fk_NoteCategory\")\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now = True)\n    class Meta:\n        verbose_name = 'Note'\n        verbose_name_plural = 'Notes'",
         "detail": "backend.apps.models",
         "documentation": {}
     },
@@ -391,7 +416,7 @@
         "kind": 5,
         "importPath": "backend.apps.urls",
         "description": "backend.apps.urls",
-        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n    path('notes/', views.NotesViews, name='getNotes'),\n]",
+        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n]",
         "detail": "backend.apps.urls",
         "documentation": {}
     },
@@ -400,7 +425,7 @@
         "kind": 5,
         "importPath": "backend.apps.urls",
         "description": "backend.apps.urls",
-        "peekOfCode": "urlpatterns = [\n    path('notes/', views.NotesViews, name='getNotes'),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n]",
         "detail": "backend.apps.urls",
         "documentation": {}
     },
@@ -427,7 +452,7 @@
         "kind": 2,
         "importPath": "backend.apps.views",
         "description": "backend.apps.views",
-        "peekOfCode": "def NotesViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Notes, NotesSerializer)\n        else:\n            return Utils._get(Notes, NotesSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        new_note = Notes.objects.create(\n           content = data['content'],",
+        "peekOfCode": "def NotesViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Notes, NotesSerializer)\n        else:\n            return Utils._get(Notes, NotesSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        if data['is_task']:\n            new_note = Notes.objects.create(",
         "detail": "backend.apps.views",
         "documentation": {}
     },
