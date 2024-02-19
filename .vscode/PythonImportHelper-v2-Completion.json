@@ -301,7 +301,7 @@
         "kind": 6,
         "importPath": "backend.apps.admin",
         "description": "backend.apps.admin",
-        "peekOfCode": "class CategoryAdmin(admin.ModelAdmin):\n    list_filter = ('title',)\n    fields = ('description' , 'user' , 'updated_at' ,)\n    ordering = ('title' , 'description', 'created_at',)\n    search_fields = ['description']\n@admin.register(Notes)\nclass NotesAdmin(admin.ModelAdmin):\n       list_filter = ('content',)\n       fields = ('content' , 'status' , 'category' , 'created_at' , 'updated_at' ,)\n       ordering = ('status' , 'content' , 'category' , 'created_at' ,)",
+        "peekOfCode": "class CategoryAdmin(admin.ModelAdmin):\n    pass\n@admin.register(Notes)\nclass NotesAdmin(admin.ModelAdmin):\n       pass\n@admin.register(User)\nclass UserAdmin(admin.ModelAdmin):\n    pass",
         "detail": "backend.apps.admin",
         "documentation": {}
     },
@@ -310,7 +310,7 @@
         "kind": 6,
         "importPath": "backend.apps.admin",
         "description": "backend.apps.admin",
-        "peekOfCode": "class NotesAdmin(admin.ModelAdmin):\n       list_filter = ('content',)\n       fields = ('content' , 'status' , 'category' , 'created_at' , 'updated_at' ,)\n       ordering = ('status' , 'content' , 'category' , 'created_at' ,)\n       search_fields = ['content']\n@admin.register(User)\nclass UserAdmin(admin.ModelAdmin):\n    list_filter = ('email',)\n    fields = ('username' , 'lastname' , 'first_name' , 'profile',)\n    ordering = ('username' , 'last_name' , 'first_name' , 'profile',)",
+        "peekOfCode": "class NotesAdmin(admin.ModelAdmin):\n       pass\n@admin.register(User)\nclass UserAdmin(admin.ModelAdmin):\n    pass",
         "detail": "backend.apps.admin",
         "documentation": {}
     },
@@ -319,7 +319,7 @@
         "kind": 6,
         "importPath": "backend.apps.admin",
         "description": "backend.apps.admin",
-        "peekOfCode": "class UserAdmin(admin.ModelAdmin):\n    list_filter = ('email',)\n    fields = ('username' , 'lastname' , 'first_name' , 'profile',)\n    ordering = ('username' , 'last_name' , 'first_name' , 'profile',)\n    search_fields = ['username']",
+        "peekOfCode": "class UserAdmin(admin.ModelAdmin):\n    pass",
         "detail": "backend.apps.admin",
         "documentation": {}
     },
