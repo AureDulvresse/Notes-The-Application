@@ -52,19 +52,27 @@ def NotesViews(request, pk = None) -> Response:
         
     elif request.method == "POST":
         data = request.data
+
+        cat = Category.objects.get(id = data['category'])
         
         if data['is_task']:
             new_note = Notes.objects.create(
                 content = data['content'],
                 is_task = data['is_task'],
-                status = data['status'],
-                category = data['category'],
+                category = cat,
             )
         else:
             new_note = Notes.objects.create(
                 content = data['content'],
-                category = data['category'],
+                category = cat,
             )
+        
+        if not data['description'] == "":
+            new_note.description = data['description']
+        
+        new_note.bgColor = data['bgColor']
+
+        new_note.save()
         
         serializer = NotesSerializer(new_note, many = False)
 

@@ -100,6 +100,30 @@
         "documentation": {}
     },
     {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "models",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
+        "label": "migrations",
+        "importPath": "django.db",
+        "description": "django.db",
+        "isExtraImport": true,
+        "detail": "django.db",
+        "documentation": {}
+    },
+    {
         "label": "models",
         "importPath": "django.db",
         "description": "django.db",
@@ -297,6 +321,24 @@
         "documentation": {}
     },
     {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.apps.migrations.0003_notes_bgcolor",
+        "description": "backend.apps.migrations.0003_notes_bgcolor",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('apps', '0002_notes_description'),\n    ]\n    operations = [\n        migrations.AddField(\n            model_name='notes',\n            name='bgColor',\n            field=models.CharField(default='rgb(249 115 22 / var(--tw-bg-opacity))', max_length=30),\n        ),",
+        "detail": "backend.apps.migrations.0003_notes_bgcolor",
+        "documentation": {}
+    },
+    {
+        "label": "Migration",
+        "kind": 6,
+        "importPath": "backend.apps.migrations.0004_alter_notes_uuid",
+        "description": "backend.apps.migrations.0004_alter_notes_uuid",
+        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('apps', '0003_notes_bgcolor'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='notes',\n            name='uuid',\n            field=shortuuid.django_fields.ShortUUIDField(alphabet='abcdefgh12345678', length=10, max_length=30, prefix='note', unique=True),\n        ),",
+        "detail": "backend.apps.migrations.0004_alter_notes_uuid",
+        "documentation": {}
+    },
+    {
         "label": "CategoryAdmin",
         "kind": 6,
         "importPath": "backend.apps.admin",
@@ -355,7 +397,7 @@
         "kind": 6,
         "importPath": "backend.apps.models",
         "description": "backend.apps.models",
-        "peekOfCode": "class Notes(models.Model):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='cat' , alphabet='abcdefgh12345678')\n    content = models.TextField(max_length=1000)\n    description = models.TextField(null = True, blank = True)\n    is_task = models.BooleanField(default = False)\n    status = models.BooleanField(default = False)\n    category = models.ForeignKey(Category, on_delete = models.CASCADE , related_name=\"fk_NoteCategory\")\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now = True)\n    class Meta:",
+        "peekOfCode": "class Notes(models.Model):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='note' , alphabet='abcdefgh12345678')\n    content = models.TextField(max_length=1000)\n    description = models.TextField(null = True, blank = True)\n    is_task = models.BooleanField(default = False)\n    status = models.BooleanField(default = False)\n    category = models.ForeignKey(Category, on_delete = models.CASCADE , related_name=\"fk_NoteCategory\")\n    bgColor = models.CharField(max_length=30, default=\"rgb(249 115 22 / var(--tw-bg-opacity))\")\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now = True)",
         "detail": "backend.apps.models",
         "documentation": {}
     },
@@ -427,7 +469,7 @@
         "kind": 2,
         "importPath": "backend.apps.views",
         "description": "backend.apps.views",
-        "peekOfCode": "def NotesViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Notes, NotesSerializer)\n        else:\n            return Utils._get(Notes, NotesSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        if data['is_task']:\n            new_note = Notes.objects.create(",
+        "peekOfCode": "def NotesViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Notes, NotesSerializer)\n        else:\n            return Utils._get(Notes, NotesSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        cat = Category.objects.get(id = data['category'])\n        if data['is_task']:",
         "detail": "backend.apps.views",
         "documentation": {}
     },

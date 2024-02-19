@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import { BiCheck, BiX } from "react-icons/bi";
 
-import { updatedAgo, randomRgbaColor } from "../index.js"
+import { updatedAgo } from "../index.js";
 
 const NoteCard = ({ note }) => {
-  
   const updateDate = updatedAgo(note.updated_at);
 
   return (
@@ -12,7 +11,7 @@ const NoteCard = ({ note }) => {
       <Link to={note.uuid + "/show"}>
         <div
           className="px-4 flex-wrap py-2 shadow-md rounded-md h-[180px] relative"
-          style={{ backgroundColor: randomRgbaColor() }}
+          style={{ backgroundColor: note.bgColor }}
         >
           <h3 className="text-white font-bold">{note.content}</h3>
           <p className="text-slate-100 font-light break-words line-clamp-4">

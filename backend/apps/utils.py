@@ -23,7 +23,7 @@ class Utils:
     def _update(request, model, model_serializer, param) -> Response:
         data = request.data
 
-        element = model.objects.get(id = param)
+        element = model.objects.get(uuid = param)
 
         serializer = model_serializer(instance=element, data=data)
 
@@ -35,7 +35,7 @@ class Utils:
     
     
     def _delete(model, param) -> Response:
-        element_to_delete = model.objects.get(id = param)
+        element_to_delete = model.objects.get(uuid = param)
         element_to_delete.delete()
 
         return Response("Suppression effectuée")

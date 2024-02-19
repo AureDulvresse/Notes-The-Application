@@ -7,16 +7,16 @@ import "react-toastify/dist/ReactToastify.css";
 
 import NoteCard from "./NoteCard";
 import NoteLoader from "./NoteLoader";
+import { randomRgbaColor } from "..";
 
 const NotesGrid = () => {
   const [newNote, setNewNote] = useState("");
   const [newNoteDescription, setNewNoteDescription] = useState("");
-  const [newNoteCategory, setNewNoteCategory] = useState(1);
-  const [is_task, setIs_task] = useState(false);
+  const [newNoteCategory, setNewNoteCategory] = useState("1");
+  const [is_task, setIs_task] = useState("off");
 
   const queryClient = useQueryClient();
   const queryKey = [["notes"], ["categories"]];
-
   const { isLoading, error, data } = useQuery({
     queryKey: queryKey[0],
     queryFn: async () =>
@@ -25,9 +25,7 @@ const NotesGrid = () => {
         .then((res) => res.data),
   });
 
-  const notesList = data || [];
-
-  const categories = useQuery({
+  const { data: cats } = useQuery({
     queryKey: queryKey[1],
     queryFn: async () =>
       await axios
@@ -35,16 +33,19 @@ const NotesGrid = () => {
         .then((res) => res.data),
   });
 
+  const notesList = data || [];
+  const categories = cats || [];
+
   const addNote = useMutation({
     mutationFn: async () => {
       const data = {
-        content: newNote,
+        content: newNote.trimEnd(),
         description: newNoteDescription,
         category: newNoteCategory,
-        is_task: is_task,
+        is_task: Boolean(is_task),
+        bgColor: randomRgbaColor(),
       };
       await axios.post("http://localhost:8000/api/notes/", data);
-      console.log("hello");
     },
     onSuccess: () => {
       toast.success("Note créée avec succès", {
@@ -59,6 +60,9 @@ const NotesGrid = () => {
         transition: Bounce,
       });
       queryClient.invalidateQueries({ queryKey: queryKey[0] });
+      setNewNote("");
+      setNewNoteDescription("");
+      setIs_task("off");
     },
   });
 
@@ -109,7 +113,7 @@ const NotesGrid = () => {
               className="px-4 py-2 rounded-md"
               onChange={(event) => setNewNoteCategory(event.target.value)}
             >
-              {categories.data.map((category, index) => (
+              {categories.map((category, index) => (
                 <option key={index} value={category.id}>
                   {category.title}
                 </option>
