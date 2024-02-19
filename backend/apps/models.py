@@ -39,6 +39,7 @@ class Category(models.Model):
         return self.title      
       
 class Notes(models.Model):
+    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='cat' , alphabet='abcdefgh12345678')
     content = models.TextField(max_length=1000)
     is_task = models.BooleanField(default = False)
     status = models.BooleanField(default = False)
