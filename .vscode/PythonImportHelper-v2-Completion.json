@@ -132,6 +132,14 @@
         "documentation": {}
     },
     {
+        "label": "ModelSerializer",
+        "importPath": "rest_framework.serializers",
+        "description": "rest_framework.serializers",
+        "isExtraImport": true,
+        "detail": "rest_framework.serializers",
+        "documentation": {}
+    },
+    {
         "label": "TestCase",
         "importPath": "django.test",
         "description": "django.test",
@@ -341,6 +349,33 @@
         "description": "backend.apps.models",
         "peekOfCode": "class Notes(models.Model):\n    content = models.TextField(max_length=1000)\n    is_task = models.BooleanField()\n    category = models.ForeignKey(Category, on_delete = models.CASCADE , related_name=\"fk_NoteCategory\")\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now = True)\n    class Meta:\n        verbose_name = 'Note'\n        verbose_name_plural = 'Notes'\n    def __str__(self):",
         "detail": "backend.apps.models",
+        "documentation": {}
+    },
+    {
+        "label": "CategorySerializer",
+        "kind": 6,
+        "importPath": "backend.apps.serializers",
+        "description": "backend.apps.serializers",
+        "peekOfCode": "class CategorySerializer(ModelSerializer):\n    class Meta:\n        model = Category\n        fields = \"__all__\"\nclass NotesSerializer(ModelSerializer):\n    class Meta:\n        model = Notes\n        fields = \"__all__\"\nclass UserSerializer(ModelSerializer):\n    class Meta:",
+        "detail": "backend.apps.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "NotesSerializer",
+        "kind": 6,
+        "importPath": "backend.apps.serializers",
+        "description": "backend.apps.serializers",
+        "peekOfCode": "class NotesSerializer(ModelSerializer):\n    class Meta:\n        model = Notes\n        fields = \"__all__\"\nclass UserSerializer(ModelSerializer):\n    class Meta:\n        model = User\n        fields = [\"\"]",
+        "detail": "backend.apps.serializers",
+        "documentation": {}
+    },
+    {
+        "label": "UserSerializer",
+        "kind": 6,
+        "importPath": "backend.apps.serializers",
+        "description": "backend.apps.serializers",
+        "peekOfCode": "class UserSerializer(ModelSerializer):\n    class Meta:\n        model = User\n        fields = [\"\"]",
+        "detail": "backend.apps.serializers",
         "documentation": {}
     },
     {
