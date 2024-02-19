@@ -41,6 +41,7 @@ class Category(models.Model):
 class Notes(models.Model):
     uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='cat' , alphabet='abcdefgh12345678')
     content = models.TextField(max_length=1000)
+    description = models.TextField(null = True, blank = True)
     is_task = models.BooleanField(default = False)
     status = models.BooleanField(default = False)
     category = models.ForeignKey(Category, on_delete = models.CASCADE , related_name="fk_NoteCategory")

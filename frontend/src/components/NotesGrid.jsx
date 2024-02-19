@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { axios } from "axios";
+import axios from "axios";
 import NoteCard from "./NoteCard";
-import { useState } from "react";
+import NoteLoader from "./NoteLoader";
+import { useEffect, useState } from "react";
 
 const NotesGrid = () => {
   const [newNotes, setNewNote] = useState("");
 
   const queryClient = useQueryClient();
-
   const queryKey = ["notes"];
-
   const { isLoading, error, data } = useQuery({
     queryKey: queryKey,
     queryFn: async () =>
@@ -21,7 +20,17 @@ const NotesGrid = () => {
 
   const notesList = data || [];
 
-  if (isLoading) return "Loading";
+  if (isLoading) {
+    console.log("Chargement des données...");
+    return (
+      <div className="flex flex-col md:grid md:grid-cols-4 gap-4 mt-4">
+        <NoteLoader />
+        <NoteLoader />
+        <NoteLoader />
+        <NoteLoader />
+      </div>
+    );
+  }
 
   if (error) {
     console.log(error.message);
@@ -35,32 +44,10 @@ const NotesGrid = () => {
         className="px-3 py-1 w-[300px] border-[0.8px] text-slate-700 dark:text-slate-100 border-slate-300 dark:border-slate-500 outline-none rounded-md hover:border-orange-400 focus:border-[1.2px] focus:border-orange-500 placeholder:text-slate-200 dark:placeholder:text-slate-500  bg-white dark:bg-gray-700"
         placeholder="Recherche..."
       />
-      <div className="flex flex-col md:grid md:grid-cols-3 gap-4 mt-4">
-        {
-          notesList.map((note, index) => {
-            <Link to={"note./show"} key={index}>
-              <NoteCard />
-            </Link>;
-          })
-        }
-        <Link to={"5/show"}>
-          <NoteCard />
-        </Link>
-        <Link to={"5/show"}>
-          <NoteCard />
-        </Link>
-        <Link to={"5/show"}>
-          <NoteCard />
-        </Link>
-        <Link to={"5/show"}>
-          <NoteCard />
-        </Link>
-        <Link to={"5/show"}>
-          <NoteCard />
-        </Link>
-        <Link to={"5/show"}>
-          <NoteCard />
-        </Link>
+      <div className="flex flex-col md:grid md:grid-cols-4 gap-4 mt-4">
+        {notesList.map((note, index) => {
+          return <NoteCard note={note} key={index} />;
+        })}
       </div>
       <form className="mt-3 w-full flex items-start gap-2">
         <textarea

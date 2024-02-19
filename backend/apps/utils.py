@@ -13,7 +13,7 @@ class Utils:
 
     def _get(model, model_serializer, param) -> Response:
 
-        element = model.objects.get(id = param)
+        element = model.objects.get(uuid = param)
 
         serializer = model_serializer(element, many = False)
 
