@@ -11,12 +11,14 @@ import NoteLoader from "./NoteLoader";
 const NotesGrid = () => {
   const [newNote, setNewNote] = useState("");
   const [newNoteDescription, setNewNoteDescription] = useState("");
+  const [newNoteCategory, setNewNoteCategory] = useState(1);
   const [is_task, setIs_task] = useState(false);
 
   const queryClient = useQueryClient();
-  const queryKey = ["notes"];
+  const queryKey = [["notes"], ["categories"]];
+
   const { isLoading, error, data } = useQuery({
-    queryKey: queryKey,
+    queryKey: queryKey[0],
     queryFn: async () =>
       await axios
         .get("http://127.0.0.1:8000/api/notes/")
@@ -25,14 +27,24 @@ const NotesGrid = () => {
 
   const notesList = data || [];
 
+  const categories = useQuery({
+    queryKey: queryKey[1],
+    queryFn: async () =>
+      await axios
+        .get("http://127.0.0.1:8000/api/categories/1")
+        .then((res) => res.data),
+  });
+
   const addNote = useMutation({
     mutationFn: async () => {
       const data = {
         content: newNote,
         description: newNoteDescription,
+        category: newNoteCategory,
         is_task: is_task,
       };
       await axios.post("http://localhost:8000/api/notes/", data);
+      console.log("hello");
     },
     onSuccess: () => {
       toast.success("Note créée avec succès", {
@@ -46,7 +58,7 @@ const NotesGrid = () => {
         theme: "dark",
         transition: Bounce,
       });
-      queryClient.invalidateQueries({ queryKey: queryKey });
+      queryClient.invalidateQueries({ queryKey: queryKey[0] });
     },
   });
 
@@ -92,12 +104,24 @@ const NotesGrid = () => {
             placeholder="Description (optionnel)"
             onChange={(event) => setNewNoteDescription(event.target.value)}
           ></textarea>
+          <div>
+            <select
+              className="px-4 py-2 rounded-md"
+              onChange={(event) => setNewNoteCategory(event.target.value)}
+            >
+              {categories.data.map((category, index) => (
+                <option key={index} value={category.id}>
+                  {category.title}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="flex items-center justify-center gap-2">
             <p className="text-white">Enregistrer comme tâche </p>
             <input
               type="checkbox"
               name="isTask"
-              className="default:ring-2 w-4 h-4"
+              className="default:ring-2 rounded text-orange-500 focus:bg-orange-500 w-4 h-4"
               onChange={(event) => setIs_task(event.target.value)}
             />
           </div>

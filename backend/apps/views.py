@@ -9,15 +9,14 @@ from .utils import Utils
 # Create your views here.
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
-def CategoryViews(request, pk = None) -> Response:
+def CategoryViews(request, id_user) -> Response:
 
     if request.method == "GET":
+        categories = Category.objects.all().filter(user = id_user)
 
-        if not pk:
-            return Utils._list(Category, CategorySerializer)
-        
-        else:
-            return Utils._get(Category, CategorySerializer, pk)
+        serializer = CategorySerializer(categories, many = True)
+
+        return Response(serializer.data)
         
     if request.method == "POST":
         data = request.data

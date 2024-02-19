@@ -391,7 +391,7 @@
         "kind": 5,
         "importPath": "backend.apps.urls",
         "description": "backend.apps.urls",
-        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n]",
+        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n    path('categories/<str:id_user>', views.CategoryViews, name=\"Categories\"),\n]",
         "detail": "backend.apps.urls",
         "documentation": {}
     },
@@ -400,7 +400,7 @@
         "kind": 5,
         "importPath": "backend.apps.urls",
         "description": "backend.apps.urls",
-        "peekOfCode": "urlpatterns = [\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n    path('categories/<str:id_user>', views.CategoryViews, name=\"Categories\"),\n]",
         "detail": "backend.apps.urls",
         "documentation": {}
     },
@@ -418,7 +418,7 @@
         "kind": 2,
         "importPath": "backend.apps.views",
         "description": "backend.apps.views",
-        "peekOfCode": "def CategoryViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Category, CategorySerializer)\n        else:\n            return Utils._get(Category, CategorySerializer, pk)\n    if request.method == \"POST\":\n        data = request.data\n        new_category = Category.objects.create(\n            title = data['title'],",
+        "peekOfCode": "def CategoryViews(request, id_user) -> Response:\n    if request.method == \"GET\":\n        categories = Category.objects.all().filter(user = id_user)\n        serializer = CategorySerializer(categories, many = True)\n        return Response(serializer.data)\n    if request.method == \"POST\":\n        data = request.data\n        new_category = Category.objects.create(\n            title = data['title'],\n            description = data['description'],",
         "detail": "backend.apps.views",
         "documentation": {}
     },

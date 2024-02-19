@@ -6,4 +6,5 @@ app_name = 'api'
 urlpatterns = [
     path('notes/', views.NotesViews, name='Notes'),
     path('notes/<str:pk>', views.NotesViews, name="Notes"),
+    path('categories/<str:id_user>', views.CategoryViews, name="Categories"),
 ]
