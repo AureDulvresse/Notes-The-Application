@@ -1,0 +1,46 @@
+{% extends "layout/base.html" %}
+{% load static %}
+{% block title %}Register{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="{% static 'usersauths/fichier/css/bootstrap.min.css'%}">
+{% endblock styles %}
+{% block content %}
+{% include "partial/navbar.html" %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="container mb-3 mt-3 p-4">
+        <div class="row align-itemsy-center justify-content-between">
+
+            <div class="col-md-6 m-0">
+                <h2 class="text-black mx-4 h1">Create an Account</h2>
+                <p class="mx-4"> have you already account? <a href="{% url "usersauths:login" %}">Login</a></p>
+                <div class="container d-flex flex-column p-4">
+                    <div class="form-group mb-5 rounded-2 h-100">
+                        {{form.username}}
+                    </div>
+                    <div class="form-group mb-5 rounded-2 h-100">
+                        {{form.email}}
+                    </div>
+                    <div class="form-group mb-5 rounded-2 h-100">
+                        {{form.password1}}
+                    </div>
+                    <div class="form-group mb-5 rounded-2 h-100">
+                        {{form.password2}}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-lg btn-white  border border-2 btn-outline-success mx-4 w-50">Register</button>
+            </div>
+            <div class="col-md-6 border border-2 shadow-sm w-50 d-flex flex-column align-items-center rounded-3 ">
+                <h1 class="mt-4 ">Continue with </h1>
+                <button class="btn btn-primary w-75 p-3  mt-5 mb-5 text-center"><i class="fa fa-facebook-f"></i> Continue with Facebook</button>
+                <button class="btn btn-secondary w-75 p-3   text-center"> <i class="fa fa-google-plus"></i> Continue with Google</button>
+                <button class="btn btn-black bg-black text-light w-75  p-3 mt-5 text-center"> <i class="fa fa-apple"></i> Continue with Apple</button>
+            </div>
+        </div>
+
+    </div>
+    
+</form>
+<script src="{% static 'usersauths/fichier/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock content %}
