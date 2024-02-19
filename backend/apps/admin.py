@@ -2,7 +2,10 @@ from django.contrib import admin
 from .models import Category, Notes, User
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ('title',)
+    fields = ('description' , 'user' , 'updated_at' ,)
+    ordering = ('title' , 'description', 'created_at',)
+    search_fields = ['description']
     
 @admin.register(Notes)
 class NotesAdmin(admin.ModelAdmin):
