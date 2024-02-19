@@ -180,19 +180,35 @@
         "documentation": {}
     },
     {
-        "label": "render",
-        "importPath": "django.shortcuts",
-        "description": "django.shortcuts",
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
         "isExtraImport": true,
-        "detail": "django.shortcuts",
+        "detail": "rest_framework.response",
         "documentation": {}
     },
     {
-        "label": "login_required",
-        "importPath": "django.contrib.auth.decorators",
-        "description": "django.contrib.auth.decorators",
+        "label": "Response",
+        "importPath": "rest_framework.response",
+        "description": "rest_framework.response",
         "isExtraImport": true,
-        "detail": "django.contrib.auth.decorators",
+        "detail": "rest_framework.response",
+        "documentation": {}
+    },
+    {
+        "label": "api_view",
+        "importPath": "rest_framework.decorators",
+        "description": "rest_framework.decorators",
+        "isExtraImport": true,
+        "detail": "rest_framework.decorators",
+        "documentation": {}
+    },
+    {
+        "label": "Category",
+        "importPath": "backend.apps.models",
+        "description": "backend.apps.models",
+        "isExtraImport": true,
+        "detail": "backend.apps.models",
         "documentation": {}
     },
     {
@@ -383,7 +399,7 @@
         "kind": 5,
         "importPath": "backend.apps.urls",
         "description": "backend.apps.urls",
-        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n    path('index/', views.index , name='index'),\n]",
+        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n    path('notes/', views.index , name='index'),\n]",
         "detail": "backend.apps.urls",
         "documentation": {}
     },
@@ -392,16 +408,34 @@
         "kind": 5,
         "importPath": "backend.apps.urls",
         "description": "backend.apps.urls",
-        "peekOfCode": "urlpatterns = [\n    path('index/', views.index , name='index'),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('notes/', views.index , name='index'),\n]",
         "detail": "backend.apps.urls",
         "documentation": {}
     },
     {
-        "label": "index",
+        "label": "Utils",
+        "kind": 6,
+        "importPath": "backend.apps.utils",
+        "description": "backend.apps.utils",
+        "peekOfCode": "class Utils:\n    def _list(model, model_serializer) -> Response:\n        elements = model.objects.all().order_by('-updated_at')\n        serializer = model_serializer(elements, many = True)\n        return Response(serializer.data)\n    def _get(model, model_serializer, param) -> Response:\n        element = model.objects.get(id = param)\n        serializer = model_serializer(element, many = False)\n        return Response(serializer.data)",
+        "detail": "backend.apps.utils",
+        "documentation": {}
+    },
+    {
+        "label": "CategoryViews",
         "kind": 2,
         "importPath": "backend.apps.views",
         "description": "backend.apps.views",
-        "peekOfCode": "def index(request):\n    return render(request , 'apps/index.html')",
+        "peekOfCode": "def CategoryViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Category, CategorySerializer)\n        else:\n            return Utils._get(Category, CategorySerializer, pk)\n    if request.method == \"POST\":\n        data = request.data\n        new_category = Category.objects.create(\n            title = data['title'],",
+        "detail": "backend.apps.views",
+        "documentation": {}
+    },
+    {
+        "label": "NotesViews",
+        "kind": 2,
+        "importPath": "backend.apps.views",
+        "description": "backend.apps.views",
+        "peekOfCode": "def NotesViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Notes, NotesSerializer)\n        else:\n            return Utils._get(Notes, NotesSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        new_note = Notes.objects.create(\n           content = data['content'],",
         "detail": "backend.apps.views",
         "documentation": {}
     },
