@@ -7,7 +7,7 @@ class User(AbstractUser):
     username = models.CharField(max_length = 255, unique = True)
     first_name = models.CharField(max_length = 100)
     last_name = models.CharField(max_length = 100)
-    profile = models.ImageField(verbose_name="Photo de Profil", upload_to="profile")
+    profile = models.ImageField(verbose_name="Photo de Profil", upload_to="profile", default="user.png")
     
     REQUIRED_FIELDS = [
         'first_name',
