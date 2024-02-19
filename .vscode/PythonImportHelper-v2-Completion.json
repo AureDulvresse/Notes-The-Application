@@ -365,7 +365,7 @@
         "kind": 6,
         "importPath": "backend.apps.serializers",
         "description": "backend.apps.serializers",
-        "peekOfCode": "class NotesSerializer(ModelSerializer):\n    class Meta:\n        model = Notes\n        fields = \"__all__\"\nclass UserSerializer(ModelSerializer):\n    class Meta:\n        model = User\n        fields = [\"\"]",
+        "peekOfCode": "class NotesSerializer(ModelSerializer):\n    class Meta:\n        model = Notes\n        fields = \"__all__\"\nclass UserSerializer(ModelSerializer):\n    class Meta:\n        model = User\n        fields = \"__all__\"",
         "detail": "backend.apps.serializers",
         "documentation": {}
     },
@@ -374,7 +374,7 @@
         "kind": 6,
         "importPath": "backend.apps.serializers",
         "description": "backend.apps.serializers",
-        "peekOfCode": "class UserSerializer(ModelSerializer):\n    class Meta:\n        model = User\n        fields = [\"\"]",
+        "peekOfCode": "class UserSerializer(ModelSerializer):\n    class Meta:\n        model = User\n        fields = \"__all__\"",
         "detail": "backend.apps.serializers",
         "documentation": {}
     },

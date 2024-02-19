@@ -19,6 +19,6 @@ class UserSerializer(ModelSerializer):
     
     class Meta:
         model = User
-        fields = [""]
+        fields = "__all__"
 
 
