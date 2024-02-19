@@ -1,7 +1,33 @@
 import { Link } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { axios } from "axios";
 import NoteCard from "./NoteCard";
+import { useState } from "react";
 
 const NotesGrid = () => {
+  const [newNotes, setNewNote] = useState("");
+
+  const queryClient = useQueryClient();
+
+  const queryKey = ["notes"];
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: queryKey,
+    queryFn: async () =>
+      await axios
+        .get("http://127.0.0.1:8000/api/notes/")
+        .then((res) => res.data),
+  });
+
+  const notesList = data || [];
+
+  if (isLoading) return "Loading";
+
+  if (error) {
+    console.log(error.message);
+    return "Une erreur s'est produite: ";
+  }
+
   return (
     <div>
       <input
@@ -10,6 +36,13 @@ const NotesGrid = () => {
         placeholder="Recherche..."
       />
       <div className="flex flex-col md:grid md:grid-cols-3 gap-4 mt-4">
+        {
+          notesList.map((note, index) => {
+            <Link to={"note./show"} key={index}>
+              <NoteCard />
+            </Link>;
+          })
+        }
         <Link to={"5/show"}>
           <NoteCard />
         </Link>
