@@ -391,7 +391,7 @@
         "kind": 5,
         "importPath": "backend.apps.urls",
         "description": "backend.apps.urls",
-        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n    path('notes/', views.index , name='index'),\n]",
+        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n    path('notes/', views.NotesViews, name='getNotes'),\n]",
         "detail": "backend.apps.urls",
         "documentation": {}
     },
@@ -400,7 +400,7 @@
         "kind": 5,
         "importPath": "backend.apps.urls",
         "description": "backend.apps.urls",
-        "peekOfCode": "urlpatterns = [\n    path('notes/', views.index , name='index'),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('notes/', views.NotesViews, name='getNotes'),\n]",
         "detail": "backend.apps.urls",
         "documentation": {}
     },
