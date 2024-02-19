@@ -6,14 +6,14 @@ const Note = () => {
     "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore qua consectetur inventore harum expedita alias rem delectus repellendus.";
 
   const [updateNote, setUpdateNote] = useState(text);
-  console.log(updateNote);
+
   return (
     <div className="flex flex-col md:grid md:grid-cols-2 gap-3 mt-4 mb-2 mx-auto w-3/4">
       <div className="shadow-sm px-4 flex-wrap py-3 bg-orange-300 rounded-md h-[460px]">
         <textarea
           className="bg-inherit text-white dark:text-slate-700 outline-none rounded-md dark:focus:border-slate-600 focus:border focus:border-slate-100 resize-none w-full h-[390px] px-1 py-1 placeholder:text-slate-200 dark:placeholder:text-slate-500 cursor-pointer"
           placeholder="Ecrivez tout ce qui vous vient à l'esprit..."
-          value={text}
+          value={updateNote}
           onChange={(event) => {
             setUpdateNote(event.target.value);
           }}

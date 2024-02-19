@@ -1,15 +1,12 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import NoteCard from "./NoteCard";
 
 const NotesGrid = () => {
-  const [newNote, setNewNote] = useState("");
-  console.log(newNote);
   return (
     <div>
       <input
         type="text"
-        className="px-3 py-1 w-[300px] border-[0.8px] border-slate-300 dark:border-slate-500 outline-none rounded-md hover:border-orange-400 focus:border-[1.2px] focus:border-orange-500 placeholder:text-slate-200 dark:placeholder:text-slate-500  bg-white dark:bg-gray-700"
+        className="px-3 py-1 w-[300px] border-[0.8px] text-slate-700 dark:text-slate-100 border-slate-300 dark:border-slate-500 outline-none rounded-md hover:border-orange-400 focus:border-[1.2px] focus:border-orange-500 placeholder:text-slate-200 dark:placeholder:text-slate-500  bg-white dark:bg-gray-700"
         placeholder="Recherche..."
       />
       <div className="flex flex-col md:grid md:grid-cols-3 gap-4 mt-4">

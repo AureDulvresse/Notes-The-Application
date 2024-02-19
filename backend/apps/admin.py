@@ -1,13 +1,13 @@
 from django.contrib import admin
-from .models import Libel , Category , Notes
+from .models import Category, Notes, User
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['title' , 'image_category']
+    pass
     
 @admin.register(Notes)
 class NotesAdmin(admin.ModelAdmin):
-    list_display = ['content' , 'image']
+    pass
     
-@admin.register(Libel)
-class LibelAdmin(admin.ModelAdmin):
-    list_display = ['title']
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    pass
