@@ -1,7 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from backend.apps.models import Category
 from .models import Category, Notes, User
 from .serializers import CategorySerializer, NotesSerializer, UserSerializer
 

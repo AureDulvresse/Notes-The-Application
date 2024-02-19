@@ -204,14 +204,6 @@
         "documentation": {}
     },
     {
-        "label": "Category",
-        "importPath": "backend.apps.models",
-        "description": "backend.apps.models",
-        "isExtraImport": true,
-        "detail": "backend.apps.models",
-        "documentation": {}
-    },
-    {
         "label": "os",
         "kind": 6,
         "isExtraImport": true,
