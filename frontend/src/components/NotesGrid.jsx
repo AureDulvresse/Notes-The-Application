@@ -112,25 +112,32 @@ const NotesGrid = () => {
       </div>
       <form className="mt-3 w-full md:grid md:grid-cols-2 flex gap-2 flex-col">
         <textarea
-          className="border-[0.4px] border-slate-300 dark:border-slate-500 outline-none rounded-md focus:border focus:border-orange-500 resize-none w-full h-[200px] px-3 py-2 text-slate-700 dark:text-slate-100 placeholder:text-slate-200 dark:placeholder:text-slate-500 bg-white dark:bg-gray-700"
+          className="border-[0.4px] border-slate-300 dark:border-slate-700 outline-none rounded-md focus:border focus:border-slate-700 resize-none w-full h-[200px] px-3 py-2 text-slate-700 dark:text-slate-100 placeholder:text-slate-200 dark:placeholder:text-slate-500 bg-white dark:bg-gray-700"
           placeholder="Ecrit n'importe quoi ici..."
           value={newNote}
           onChange={(event) => setNewNote(event.target.value)}
         ></textarea>
         <div className="flex items-start flex-col gap-2 w-full">
           <textarea
-            className="border-[0.4px] border-slate-300 dark:border-slate-500 outline-none rounded-md focus:border focus:border-orange-500 resize-none w-full h-[70px] px-3 py-2 text-slate-700 dark:text-slate-100 placeholder:text-slate-200 dark:placeholder:text-slate-500 bg-white dark:bg-gray-700"
+            className="border-[0.4px] border-slate-300 dark:border-slate-600 outline-none rounded-md focus:border focus:border-slate-700 resize-none w-full h-[70px] px-3 py-2 text-slate-700 dark:text-slate-100 placeholder:text-slate-200 dark:placeholder:text-slate-500 bg-white dark:bg-gray-700"
             placeholder="Description (optionnel)"
             onChange={(event) => setNewNoteDescription(event.target.value)}
           ></textarea>
-          <div>
+          <div className="mb-3 flex items-center gap-2">
+            <p className="text-[18px] text-slate-600 dark:text-white">
+              Categorie:
+            </p>
             <select
-              className="px-4 py-2 rounded-md"
+              className="px-2 py-1 rounded-md bg-inherit outline-none border-[0.4px] border-slate-300 dark:border-slate-600 text-slate-700 dark:text-white"
               onChange={(event) => setNewNoteCategory(event.target.value)}
               value={newNoteCategory}
             >
               {categories.map((category, index) => (
-                <option key={index} value={category.id}>
+                <option
+                  className="text-slate-700 dark:text-white bg-slate-200 dark:bg-slate-600 cursor-pointer"
+                  key={index}
+                  value={category.id}
+                >
                   {category.title}
                 </option>
               ))}
@@ -159,7 +166,7 @@ const NotesGrid = () => {
           </div>
           <button
             type="button"
-            className="rounded-md bg-orange-500 px-3.5 py-2.5 w-[110px] text-sm font-semibold text-white dark:text-slate-700 shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+            className="mt-2 rounded-md bg-orange-500 px-3.5 py-2.5 w-full text-sm font-bold dark:text-white text-slate-700 shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
             onClick={() => {
               newNote == ""
                 ? toast.error("Vous ne pouvez pas enregistrer de note vide", {

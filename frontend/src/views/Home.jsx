@@ -11,6 +11,12 @@ const Home = () => {
           Dashboard
         </Link>
         <Link
+          to={"categories/"}
+          className="text-slate-700 dark:text-slate-200 font-normal hover:text-orange-400  active:text-orange-500 active:font-normal"
+        >
+          Category
+        </Link>
+        <Link
           to={"notes/"}
           className="text-slate-700 dark:text-slate-200 font-normal hover:text-orange-400  active:text-orange-500 active:font-normal"
         >

@@ -1,9 +1,3 @@
-export function updatedAgo(date) {
-  const now = new Date();
-  date = new Date(date);
-  return Math.floor((now - date) / 8640000);
-}
-
 export function randomRgbaColor() {
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);

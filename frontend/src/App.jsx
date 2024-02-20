@@ -11,6 +11,7 @@ import Footer from "./components/layout/Footer";
 
 import Dashboard from "./components/Dashboard";
 import NotesGrid from "./components/NotesGrid";
+import CategoriesGrid from "./components/CategoriesGrid";
 import Profile from "./views/Profile";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
     ],
+  },
+  {
+    path: "categories/",
+    element: <CategoriesGrid />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "notes/:id/show",

@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import { BiCheck, BiX } from "react-icons/bi";
-
-import { updatedAgo } from "../index.js";
+import since from "since-time-ago";
 
 const NoteCard = ({ note }) => {
-  const updateDate = updatedAgo(note.updated_at);
+  const updateDate = since(new Date(note.updated_at));
 
   return (
     <>
@@ -14,13 +13,12 @@ const NoteCard = ({ note }) => {
           style={{ backgroundColor: note.bgColor }}
         >
           <h3 className="text-white font-bold">{note.content}</h3>
-          <p className="text-slate-100 font-light break-words line-clamp-4">
+          <p className="text-slate-100 font-light leading-[21px] italic line-clamp-4">
             {note.description}
           </p>
-          <div className="mt-3 flex items-center justify-center gap-3 absolute bottom-4">
-            <p className="text-slate-100 text-[14px]">
-              Mise à jour:{" "}
-              {updateDate == 0 ? "Aujourd'hui" : "il y a ".concat(updateDate)}
+          <div className="mt-3 flex items-center justify-between gap-3 absolute bottom-4">
+            <p className="text-slate-100 text-[13px] italic">
+              Mise à jour: <span className=" font-medium">{updateDate}</span>
             </p>
             {note.is_task ? (
               note.status ? (
