@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -12,6 +12,7 @@ import NoteLoader2 from "./../components/NoteLoader2";
 
 const Note = () => {
   const { id } = useParams(["id"]);
+  const navigate = useNavigate();
 
   const [currentNote, setCurrentNote] = useState("");
   const [updateDate, setUpdateDate] = useState("");
@@ -51,7 +52,7 @@ const Note = () => {
   const updateNote = useMutation({
     mutationFn: async () => {
       const data = {
-        content: currentNote.trimEnd(),
+        content: currentNote.trim(),
         description: currentNoteDescription,
         category: currentNoteCategory,
         status: currentNoteStatus,
@@ -74,6 +75,59 @@ const Note = () => {
         transition: Bounce,
       });
       queryClient.invalidateQueries({ queryKey: queryKey[0] });
+    },
+    onError: () => {
+      toast.error("Une erreur s'est produite", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    },
+  });
+
+  const removeNote = useMutation({
+    mutationFn: async () => {
+      await axios.delete("http://localhost:8000/api/notes/".concat(note.id));
+    },
+    onSuccess: () => {
+      toast.success("Note supprimée avec succès", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      queryClient.invalidateQueries({ queryKey: queryKey[0] });
+      setTimeout(() => {
+        setCurrentNote("");
+        setCurrentNoteCategory("");
+        setCurrentNoteDescription("");
+        setCurrentNoteStatus(false);
+        navigate("/notes/");
+      }, 4000);
+    },
+    onError: () => {
+      toast.error("Une erreur s'est produite", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     },
   });
 
@@ -182,6 +236,7 @@ const Note = () => {
             <button
               type="button"
               className="rounded-md bg-red-600 px-3.5 py-2.5 w-[110px] text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+              onClick={() => removeNote.mutate()}
             >
               Supprimer
             </button>

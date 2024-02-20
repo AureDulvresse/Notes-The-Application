@@ -35,7 +35,7 @@ class Utils:
     
     
     def _delete(model, param) -> Response:
-        element_to_delete = model.objects.get(uuid = param)
+        element_to_delete = model.objects.get(id = param)
         element_to_delete.delete()
 
         return Response("Suppression effectuée")
