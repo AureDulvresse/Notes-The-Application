@@ -8,8 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 import since from "since-time-ago";
 
-import NoteLoader2 from "./../components/NoteLoader2";
 import { BiArrowBack, BiCheck, BiTrashAlt, BiX } from "react-icons/bi";
+import NoteLoader2 from "./../components/notes/NoteLoader2";
 
 const Note = () => {
   const { id } = useParams(["id"]);

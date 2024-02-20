@@ -5,15 +5,18 @@ import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { randomRgbaColor } from "../..";
+
 import NoteCard from "./NoteCard";
 import NoteLoader from "./NoteLoader";
-import { randomRgbaColor } from "..";
 
 const NotesGrid = () => {
   const [newNote, setNewNote] = useState("");
   const [newNoteDescription, setNewNoteDescription] = useState("");
   const [newNoteCategory, setNewNoteCategory] = useState("1");
   const [is_task, setIs_task] = useState(false);
+
+  const [search, setSearch] = useState("");
 
   const queryClient = useQueryClient();
   const queryKey = [["notes"], ["categories"]];
@@ -104,11 +107,19 @@ const NotesGrid = () => {
         type="text"
         className="px-3 py-1 w-[300px] border-[0.8px] text-slate-700 dark:text-slate-100 border-slate-300 dark:border-slate-500 outline-none rounded-md hover:border-orange-400 focus:border-[1.2px] focus:border-orange-500 placeholder:text-slate-200 dark:placeholder:text-slate-500  bg-white dark:bg-gray-700"
         placeholder="Recherche..."
+        value={search}
+        onChange={(event) => setSearch(event.target.value)}
       />
       <div className="flex flex-col md:grid md:grid-cols-4 gap-4 mt-4">
-        {notesList.map((note, index) => {
-          return <NoteCard note={note} key={index} />;
-        })}
+        {notesList
+          .filter((note) => {
+            return search.toLowerCase() === ""
+              ? note
+              : note.content.toLowerCase().includes(search);
+          })
+          .map((note, index) => {
+            return <NoteCard note={note} key={index} />;
+          })}
       </div>
       <form className="mt-3 w-full md:grid md:grid-cols-2 flex gap-2 flex-col">
         <textarea

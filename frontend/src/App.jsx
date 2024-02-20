@@ -5,14 +5,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Home from "./views/Home";
 import Note from "./views/Note";
 import ErrorPage from "./views/ErrorPage";
+import Profile from "./views/Profile";
 
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 
-import Dashboard from "./components/Dashboard";
-import NotesGrid from "./components/NotesGrid";
-import CategoriesGrid from "./components/CategoriesGrid";
-import Profile from "./views/Profile";
+import Dashboard from './components/dashboard/Dashboard';
+import NotesGrid from './components/notes/NotesGrid';
+import CategoriesGrid from './components/categories/CategoriesGrid';
 
 const queryClient = new QueryClient();
 

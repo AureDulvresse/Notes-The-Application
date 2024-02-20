@@ -7,7 +7,7 @@ const NoteCard = ({ note }) => {
 
   return (
     <>
-      <Link to={note.uuid + "/show"}>
+      <Link to={note.uuid + "/show"} className="">
         <div
           className="px-4 flex-wrap py-2 shadow-md rounded-md h-[180px] relative"
           style={{ backgroundColor: note.bgColor }}
