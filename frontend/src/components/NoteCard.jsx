@@ -24,9 +24,9 @@ const NoteCard = ({ note }) => {
             </p>
             {note.is_task ? (
               note.status ? (
-                <BiCheck className="bg-green-400 rounded-full px-3 ring-1 ring-green-400 text-slate-100 text-[12px]" />
+                <BiCheck className="bg-green-400 rounded-full w-5 h-5 ring-1 ring-green-400 text-slate-100 text-[20px] animate-bounce" />
               ) : (
-                <BiX className="bg-red-400 rounded-full px-3 ring-1 ring-red-400 text-slate-100 text-[12px]" />
+                <BiX className="bg-red-400 rounded-full w-5 h-5 ring-1 ring-red-400 text-slate-100 text-[20px] animate-bounce" />
               )
             ) : (
               ""

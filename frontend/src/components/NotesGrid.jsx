@@ -61,7 +61,7 @@ const NotesGrid = () => {
       });
       setNewNote("");
       setNewNoteDescription("");
-      setIs_task("off");
+      setIs_task(false);
       queryClient.invalidateQueries({ queryKey: queryKey[0] });
     },
     onError: () => {
