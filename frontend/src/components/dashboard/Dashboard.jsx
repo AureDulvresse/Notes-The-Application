@@ -3,9 +3,11 @@ import StatBox from "./StatBox";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import LineChart from "./LineChart";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { axios } from "axios";
 
 const Dashboard = () => {
-  const data = [
+  const data1 = [
     {
       id: 1,
       gain: 8498,
@@ -33,11 +35,11 @@ const Dashboard = () => {
   ];
 
   const [userData, setUserData] = useState({
-    labels: data.map((data) => data.year),
+    labels: data1.map((data) => data1.year),
     datasets: [
       {
         label: "User Gained",
-        data: data.map((data) => data.gain),
+        data: data1.map((data) => data1.gain),
         backgroundColor: [
           "rgb(79,70, 229)",
           "rgb(34, 224, 38)",
@@ -48,6 +50,25 @@ const Dashboard = () => {
     ],
   });
 
+  const queryClient = useQueryClient();
+  const queryKey = ["stats"];
+  const { isLoading, error, data } = useQuery({
+    queryKey: queryKey,
+    queryFn: async () =>
+      await axios
+        .get("http://127.0.0.1:8000/api/statistiques/1")
+        .then((res) => res.data),
+  });
+
+  if (isLoading) {
+    return "Chargement des données...";
+  }
+
+  if (error) {
+    console.log(error.message);
+    return "Une erreur s'est produite: ";
+  }
+
   return (
     <>
       <div className="flex flex-col md:grid md:grid-cols-2 gap-3">
@@ -56,7 +77,9 @@ const Dashboard = () => {
         </div>
         <div className="flex flex-col md:grid md:grid-cols-1 gap-3">
           <div className="flex flex-col md:grid md:grid-cols-2 gap-3">
-            <StatBox />
+            <StatBox title={"Nombre de categorie"}>
+              <h2 className="text-orange-500 text-bold"></h2>
+            </StatBox>
             <StatBox />
           </div>
           <StatBox title={"Note Par jour"}>

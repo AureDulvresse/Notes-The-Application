@@ -8,6 +8,12 @@ from .utils import Utils
 
 # Create your views here.
 
+@api_view(['GET'])
+def StatistiquesViews(request, id_user):
+    
+    categories = Category.objects.all().filter(user = id_user).count()
+    notes = Notes.objects.all().filter()
+
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def CategoryViews(request, id_user) -> Response:
 
