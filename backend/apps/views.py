@@ -14,11 +14,30 @@ def StatistiquesViews(request, id_user):
     nb_categories = Category.objects.all().filter(user = id_user).count()
     nb_notes = Notes.objects.all().filter(user = id_user).count()
     nb_tasks_done = Notes.objects.all().filter(user = id_user, status = True).count()
+    
+    dataset = [
+        {
+            'id': 1,
+            'libelle': "Category",
+            'data': nb_categories
+        },
+        {   
+            'id': 2,
+               'libelle': "Notes",
+            'data': nb_notes,
+        },
+        {
+            'id': 3,
+               'libelle': "Accomplie",
+            'data': nb_tasks_done,
+        }
+    ]
 
     data = {
         'nb_categories': nb_categories,
         'nb_notes': nb_notes,
         'tasks_completed': nb_tasks_done,
+        'd': dataset,
     }
 
     return Response(data)
