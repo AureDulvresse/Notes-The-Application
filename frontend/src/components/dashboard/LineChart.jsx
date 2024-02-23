@@ -3,7 +3,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 
 const LineChart = ({ data }) => {
   return (
-    <div className="w-full">
+    <div className="w-full h-full">
       <Line data={data} />
     </div>
   );

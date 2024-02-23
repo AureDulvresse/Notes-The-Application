@@ -1,10 +1,10 @@
 import { useState } from "react";
-import StatBox from "./StatBox";
-import { Line } from "react-chartjs-2";
-import { Chart as ChartJS } from "chart.js/auto";
-import LineChart from "./LineChart";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { BiCollection, BiTask } from "react-icons/bi";
+import StatBox from "./StatBox";
+import LineChart from "./LineChart";
+import BarChart from "./BarChart";
 
 const Dashboard = () => {
   const data1 = [
@@ -35,11 +35,11 @@ const Dashboard = () => {
   ];
 
   const [userData, setUserData] = useState({
-    labels: data1.map((data) => data1.year),
+    labels: data1.map((data1) => data1.year),
     datasets: [
       {
         label: "User Gained",
-        data: data1.map((data) => data1.gain),
+        data: data1.map((data1) => data1.gain),
         backgroundColor: [
           "rgb(79,70, 229)",
           "rgb(34, 224, 38)",
@@ -74,16 +74,31 @@ const Dashboard = () => {
       <div className="flex flex-col md:grid md:grid-cols-2 gap-3">
         <div className="shadow-sm px-4 flex-wrap py-2 bg-slate-200 dark:bg-slate-500 rounded-md h-[200px] md:h-full">
           <h4 className="text-slate-400 dark:text-slate-700">Note Par Jour</h4>
+          <div className="min-h-full min-w-fit">
+            <LineChart data={userData} />
+          </div>
         </div>
         <div className="flex flex-col md:grid md:grid-cols-1 gap-3">
           <div className="flex flex-col md:grid md:grid-cols-2 gap-3">
             <StatBox title={"Nombre de categorie"}>
-              <h2 className="text-orange-500 text-bold"></h2>
+              <div className="flex items-center justify-center gap-2">
+                <BiCollection className="text-orange-400 text-bold text-[68px]" />
+                <h2 className="text-orange-400 text-bold text-[72px]">
+                  {data.nb_categories}
+                </h2>
+              </div>
             </StatBox>
-            <StatBox />
+            <StatBox title={"Nombre de notes"}>
+              <div className="flex items-center justify-center px-4 gap-2">
+                <BiTask className="text-orange-400 text-bold text-[68px]" />
+                <h2 className="text-orange-400 text-bold text-[72px]">
+                  {data.nb_notes}
+                </h2>
+              </div>
+            </StatBox>
           </div>
           <StatBox title={"Note Par jour"}>
-            <LineChart data={userData} />
+            <BarChart data={userData} />
           </StatBox>
         </div>
       </div>

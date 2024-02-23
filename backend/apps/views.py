@@ -11,8 +11,15 @@ from .utils import Utils
 @api_view(['GET'])
 def StatistiquesViews(request, id_user):
     
-    categories = Category.objects.all().filter(user = id_user).count()
-    notes = Notes.objects.all().filter(user = id_user).count()
+    nb_categories = Category.objects.all().filter(user = id_user).count()
+    nb_notes = Notes.objects.all().filter(user = id_user).count()
+
+    data = {
+        'nb_categories': nb_categories,
+        'nb_notes': nb_notes
+    }
+
+    return Response(data)
 
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
