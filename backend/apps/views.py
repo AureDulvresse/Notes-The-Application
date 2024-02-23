@@ -37,7 +37,7 @@ def StatistiquesViews(request, id_user):
         'nb_categories': nb_categories,
         'nb_notes': nb_notes,
         'tasks_completed': nb_tasks_done,
-        'd': dataset,
+        'dataset': dataset,
     }
 
     return Response(data)

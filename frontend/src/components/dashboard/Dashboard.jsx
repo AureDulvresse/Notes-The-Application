@@ -1,13 +1,8 @@
-import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { BiCollection, BiTask } from "react-icons/bi";
 
 import StatBox from "./StatBox";
-import BarChart from "./BarChart";
-import PieChart from "./PieChart";
-
-import { randomRgbaColor } from "../..";
 
 const Dashboard = () => {
   const queryClient = useQueryClient();
@@ -19,26 +14,6 @@ const Dashboard = () => {
         .get("http://127.0.0.1:8000/api/statistiques/1")
         .then((res) => res.data),
   });
-
-  console.log(data.d);
-
-  // const dataset = data.d;
-
-  // const [userData, setUserData] = useState({
-  //   labels: dataset.map((d) => d.libelle),
-  //   datasets: [
-  //     {
-  //       label: "Pourcentage",
-  //       data: dataset.map((d) => d.data),
-  //       backgroundColor: [
-  //         randomRgbaColor(),
-  //         randomRgbaColor(),
-  //         randomRgbaColor(),
-  //         randomRgbaColor(),
-  //       ],
-  //     },
-  //   ],
-  // });
 
   if (isLoading) {
     return "Chargement des données...";
@@ -54,9 +29,7 @@ const Dashboard = () => {
       <div className="flex flex-col md:grid md:grid-cols-2 gap-3">
         <div className="shadow-sm px-4 flex-wrap py-2 bg-slate-200 dark:bg-slate-500 rounded-md h-[200px] md:h-full">
           <h4 className="text-slate-400 dark:text-slate-700">Note Par Jour</h4>
-          <div className="min-h-full min-w-fit">
-            {/* <PieChart data={userData} /> */}
-          </div>
+          <div className="min-h-full min-w-fit"></div>
         </div>
         <div className="flex flex-col md:grid md:grid-cols-1 gap-3">
           <div className="flex flex-col md:grid md:grid-cols-2 gap-3">
@@ -77,9 +50,7 @@ const Dashboard = () => {
               </div>
             </StatBox>
           </div>
-          <StatBox title={"Note Par jour"}>
-            {/* <BarChart data={userData} /> */}
-          </StatBox>
+          <StatBox title={"Note Par jour"}></StatBox>
         </div>
       </div>
     </>
