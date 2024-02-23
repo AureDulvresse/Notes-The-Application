@@ -4,7 +4,7 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import LineChart from "./LineChart";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { axios } from "axios";
+import axios from "axios";
 
 const Dashboard = () => {
   const data1 = [

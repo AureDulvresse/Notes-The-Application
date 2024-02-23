@@ -12,7 +12,8 @@ from .utils import Utils
 def StatistiquesViews(request, id_user):
     
     categories = Category.objects.all().filter(user = id_user).count()
-    notes = Notes.objects.all().filter()
+    notes = Notes.objects.all().filter(user = id_user).count()
+
 
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 def CategoryViews(request, id_user) -> Response:
@@ -50,8 +51,8 @@ def NotesViews(request, pk = None) -> Response:
 
     if request.method == "GET":
 
-        if not pk:
-            return Utils._list(Notes, NotesSerializer)
+        if pk.isdigit():
+            return Utils._list(Notes, NotesSerializer, pk)
         
         else:
             return Utils._get(Notes, NotesSerializer, pk)
@@ -60,17 +61,20 @@ def NotesViews(request, pk = None) -> Response:
         data = request.data
 
         cat = Category.objects.get(id = data['category'])
+        user = User.objects.get(id =  data['user'])
         
         if data['is_task']:
             new_note = Notes.objects.create(
                 content = data['content'],
                 is_task = data['is_task'],
                 category = cat,
+                user = user,
             )
         else:
             new_note = Notes.objects.create(
                 content = data['content'],
                 category = cat,
+                user = user,
             )
         
         if not data['description'] == "":

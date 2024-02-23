@@ -18,13 +18,15 @@ const NotesGrid = () => {
 
   const [search, setSearch] = useState("");
 
+  const user_id = 1;
+
   const queryClient = useQueryClient();
   const queryKey = [["notes"], ["categories"]];
   const { isLoading, error, data } = useQuery({
     queryKey: queryKey[0],
     queryFn: async () =>
       await axios
-        .get("http://127.0.0.1:8000/api/notes/")
+        .get("http://127.0.0.1:8000/api/notes/1")
         .then((res) => res.data),
   });
 
@@ -45,6 +47,7 @@ const NotesGrid = () => {
         content: newNote,
         description: newNoteDescription,
         category: newNoteCategory,
+        user: user_id,
         is_task: is_task,
         bgColor: randomRgbaColor(),
       };

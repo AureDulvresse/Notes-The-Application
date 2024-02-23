@@ -50,6 +50,8 @@ const Note = () => {
   const note = data || "";
   const categories = cats || [];
 
+  const currentUser = "1";
+
   const updateNote = useMutation({
     mutationFn: async () => {
       const data = {
@@ -57,6 +59,7 @@ const Note = () => {
         description: currentNoteDescription,
         category: currentNoteCategory,
         status: currentNoteStatus,
+        user: currentUser,
       };
       await axios.put(
         "http://localhost:8000/api/notes/".concat(note.uuid),
