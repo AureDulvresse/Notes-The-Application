@@ -28,16 +28,16 @@ const NotesGrid = () => {
         .then((res) => res.data),
   });
 
-  // const { data: cats } = useQuery({
-  //   queryKey: queryKey[1],
-  //   queryFn: async () =>
-  //     await axios
-  //       .get("http://127.0.0.1:8000/api/categories/")
-  //       .then((res) => res.data),
-  // });
+  const { data: cats } = useQuery({
+    queryKey: queryKey[1],
+    queryFn: async () =>
+      await axios
+        .get("http://127.0.0.1:8000/api/categories/")
+        .then((res) => res.data),
+  });
 
   const notesList = data || [];
-  const categories = useQueryClient({ queryKey: ["categories"] }) || [];
+  const categories = cats || [];
 
   const addNote = useMutation({
     mutationFn: async () => {

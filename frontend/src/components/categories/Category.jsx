@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 
 import NoteLoader from "../notes/NoteLoader";
+import { Link } from "react-router-dom";
 
 const Category = () => {
   const [newCategory, setNewCategory] = useState("");
@@ -19,7 +20,7 @@ const Category = () => {
     queryKey: queryKey,
     queryFn: async () =>
       await axios
-        .get("http://127.0.0.1:8000/api/notes/")
+        .get("http://127.0.0.1:8000/api/categories/")
         .then((res) => res.data),
   });
 
@@ -31,7 +32,7 @@ const Category = () => {
         title: newCategory,
         description: newCategoryDescription,
       };
-      await axios.post("http://localhost:8000/api/category/", data);
+      await axios.post("http://127.0.0.1:8000/api/categories/", data);
     },
     onSuccess: () => {
       toast.success("Category enregistrée avec succès", {
@@ -102,19 +103,18 @@ const Category = () => {
               onChange={(event) => setNewCategory(event.target.value)}
             />
           </div>
-          <div className="mb-3">
+          <div className="mb-3 w-full">
             <p className="text-[18px] text-slate-600 dark:text-white">
               Description:
             </p>
-            <input
-              type="text"
-              className="px-3 py-1 w-[300px] border-[0.8px] text-slate-700 dark:text-slate-100 border-slate-300 dark:border-slate-500 outline-none rounded-md hover:border-orange-400 focus:border-[1.2px] focus:border-orange-500 placeholder:text-slate-200 dark:placeholder:text-slate-500  bg-white dark:bg-gray-700"
-              placeholder="Entrer une description (facultatif)"
+            <textarea
+              className="border-[0.4px] border-slate-700 dark:border-slate-300 outline-none rounded-md focus:border focus:border-slate-700 resize-none w-full h-[200px] px-3 py-2 text-slate-700 dark:text-slate-100 placeholder:text-slate-200 dark:placeholder:text-slate-500 bg-white dark:bg-gray-700"
+              placeholder="Entrer une description (Facultatif)"
               value={newCategoryDescription}
               onChange={(event) =>
                 setNewCategoryDescription(event.target.value)
               }
-            />
+            ></textarea>
           </div>
           <div className="mb-3">
             <button
@@ -138,6 +138,24 @@ const Category = () => {
             >
               Save
             </button>
+          </div>
+        </div>
+        <div className="flex flex-col gap-2">
+          <h3 className="text-[20px] text-orange-500">
+            Liste de vos catégories
+          </h3>
+          <div className="max-h-[300px] overflow-x-hidden flex flex-col gap-4">
+            {categories.map((category, index) => {
+              return (
+                <Link
+                  to={"category/".concat(category.uuid) + "/show"}
+                  key={index}
+                  className="shadow-md rounded-md px-2 py-4 text-dark border dark:text-slate-300 hover:bg-orange-300 hover:text-light hover:dark:text-light leading-3 cursor-pointer"
+                >
+                  {category.title}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

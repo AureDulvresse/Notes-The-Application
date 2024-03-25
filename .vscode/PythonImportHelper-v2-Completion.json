@@ -323,7 +323,7 @@
         "kind": 6,
         "importPath": "backend.apps.utils",
         "description": "backend.apps.utils",
-        "peekOfCode": "class Utils:\n    def _list(model, model_serializer, param) -> Response:\n        elements = model.objects.all().order_by('-updated_at')\n        serializer = model_serializer(elements, many = True)\n        return Response(serializer.data)\n    def _get(model, model_serializer, param) -> Response:\n        element = model.objects.get(uuid = param)\n        serializer = model_serializer(element, many = False)\n        return Response(serializer.data)",
+        "peekOfCode": "class Utils:\n    def _list(model, model_serializer) -> Response:\n        elements = model.objects.all().order_by('-updated_at')\n        serializer = model_serializer(elements, many = True)\n        return Response(serializer.data)\n    def _get(model, model_serializer, param) -> Response:\n        element = model.objects.get(uuid = param)\n        serializer = model_serializer(element, many = False)\n        return Response(serializer.data)",
         "detail": "backend.apps.utils",
         "documentation": {}
     },
@@ -332,7 +332,7 @@
         "kind": 2,
         "importPath": "backend.apps.views",
         "description": "backend.apps.views",
-        "peekOfCode": "def CategoryViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        categories = Category.objects.all()\n        serializer = CategorySerializer(categories, many = True)\n        return Response(serializer.data)\n    if request.method == \"POST\":\n        data = request.data\n        new_category = Category.objects.create(\n            title = data['title'],\n            description = data['description'],",
+        "peekOfCode": "def CategoryViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Category, CategorySerializer)\n        else:\n            return Utils._get(Category, CategorySerializer, pk)\n    if request.method == \"POST\":\n        data = request.data\n        new_category = Category.objects.create(\n            title = data['title'],",
         "detail": "backend.apps.views",
         "documentation": {}
     },
@@ -341,7 +341,7 @@
         "kind": 2,
         "importPath": "backend.apps.views",
         "description": "backend.apps.views",
-        "peekOfCode": "def NotesViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if pk.isdigit():\n            return Utils._list(Notes, NotesSerializer, pk)\n        else:\n            return Utils._get(Notes, NotesSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        cat = Category.objects.get(id = data['category'])\n        if data['is_task']:",
+        "peekOfCode": "def NotesViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if not pk:\n            return Utils._list(Notes, NotesSerializer)\n        else:\n            return Utils._get(Notes, NotesSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        cat = Category.objects.get(id = data['category'])\n        if data['is_task']:",
         "detail": "backend.apps.views",
         "documentation": {}
     },

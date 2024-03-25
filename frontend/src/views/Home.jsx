@@ -8,7 +8,7 @@ const Home = () => {
           to={""}
           className="text-slate-700 dark:text-slate-200 text-[20px] border px-3 py-2 rounded-md font-normal hover:text-orange-400  active:text-orange-500 active:font-normal"
         >
-          Category
+          Categories
         </Link>
         <Link
           to={"notes/"}

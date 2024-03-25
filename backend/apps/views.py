@@ -11,11 +11,11 @@ from .utils import Utils
 def CategoryViews(request, pk = None) -> Response:
 
     if request.method == "GET":
-        categories = Category.objects.all()
-
-        serializer = CategorySerializer(categories, many = True)
-
-        return Response(serializer.data)
+        if not pk:
+            return Utils._list(Category, CategorySerializer)
+    
+        else:
+            return Utils._get(Category, CategorySerializer, pk)
         
     if request.method == "POST":
         data = request.data
@@ -23,7 +23,7 @@ def CategoryViews(request, pk = None) -> Response:
         new_category = Category.objects.create(
             title = data['title'],
             description = data['description'],
-            thumbnail = data['thumbnail'],
+            #thumbnail = data['thumbnail'],
         )
         
         serializer = CategorySerializer(new_category, many = False)
@@ -42,9 +42,9 @@ def NotesViews(request, pk = None) -> Response:
 
     if request.method == "GET":
 
-        if pk.isdigit():
-            return Utils._list(Notes, NotesSerializer, pk)
-        
+        if not pk:
+            return Utils._list(Notes, NotesSerializer)
+    
         else:
             return Utils._get(Notes, NotesSerializer, pk)
         

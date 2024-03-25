@@ -2,7 +2,7 @@ from rest_framework.response import Response
 
 class Utils:
 
-    def _list(model, model_serializer, param) -> Response:
+    def _list(model, model_serializer) -> Response:
 
         elements = model.objects.all().order_by('-updated_at')
 
