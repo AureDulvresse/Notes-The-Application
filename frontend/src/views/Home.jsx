@@ -6,9 +6,9 @@ const Home = () => {
       <nav className="flex items-center gap-4 mb-3">
         <Link
           to={""}
-          className="text-slate-700 dark:text-slate-200 font-normal hover:text-orange-400 active:text-orange-500 active:font-normal"
+          className="text-slate-700 dark:text-slate-200 font-normal hover:text-orange-400  active:text-orange-500 active:font-normal"
         >
-          Dashboard
+          Tableau de bord
         </Link>
         <Link
           to={"categories/"}
@@ -21,12 +21,6 @@ const Home = () => {
           className="text-slate-700 dark:text-slate-200 font-normal hover:text-orange-400  active:text-orange-500 active:font-normal"
         >
           Notes
-        </Link>
-        <Link
-          to={"profil/"}
-          className="text-slate-700 dark:text-slate-200 font-normal hover:text-orange-400  active:text-orange-500 active:font-normal"
-        >
-          Profil
         </Link>
       </nav>
       <Outlet />

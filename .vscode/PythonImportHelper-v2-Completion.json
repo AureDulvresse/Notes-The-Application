@@ -9,14 +9,6 @@
         "documentation": {}
     },
     {
-        "label": "AbstractUser",
-        "importPath": "django.contrib.auth.models",
-        "description": "django.contrib.auth.models",
-        "isExtraImport": true,
-        "detail": "django.contrib.auth.models",
-        "documentation": {}
-    },
-    {
         "label": "django.db.models.deletion",
         "kind": 6,
         "isExtraImport": true,
@@ -333,20 +325,11 @@
         "documentation": {}
     },
     {
-        "label": "User",
-        "kind": 6,
-        "importPath": "backend.apps.models",
-        "description": "backend.apps.models",
-        "peekOfCode": "class User(AbstractUser):\n    email = models.EmailField(unique=True)\n    username = models.CharField(max_length = 255, unique = True)\n    first_name = models.CharField(max_length = 100)\n    last_name = models.CharField(max_length = 100)\n    profile = models.ImageField(verbose_name=\"Photo de Profil\", upload_to=\"profile\", default=\"user.png\")\n    REQUIRED_FIELDS = [\n        'first_name',\n        'last_name',\n        'email'",
-        "detail": "backend.apps.models",
-        "documentation": {}
-    },
-    {
         "label": "Category",
         "kind": 6,
         "importPath": "backend.apps.models",
         "description": "backend.apps.models",
-        "peekOfCode": "class Category(models.Model):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='cat' , alphabet='abcdefgh12345678')\n    title = models.CharField(max_length=500)\n    description = models.TextField(null = True, blank = True)\n    thumbnail = models.ImageField(upload_to='image' , default='category.jpg')\n    user = models.ForeignKey(User, on_delete = models.CASCADE)\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now = True)\n    class Meta:\n        verbose_name = 'Category'",
+        "peekOfCode": "class Category(models.Model):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='cat' , alphabet='abcdefgh12345678')\n    title = models.CharField(max_length=500)\n    description = models.TextField(null = True, blank = True)\n    thumbnail = models.ImageField(upload_to='image' , default='category.jpg')\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now = True)\n    class Meta:\n        verbose_name = 'Category'\n        verbose_name_plural = 'Categories'",
         "detail": "backend.apps.models",
         "documentation": {}
     },

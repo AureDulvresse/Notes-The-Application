@@ -1,11 +1,10 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { BiCollection, BiTask } from "react-icons/bi";
 
 import StatBox from "./StatBox";
 
 const Dashboard = () => {
-  const queryClient = useQueryClient();
   const queryKey = ["stats"];
   const { isLoading, error, data } = useQuery({
     queryKey: queryKey,
