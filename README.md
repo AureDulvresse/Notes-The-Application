@@ -4,7 +4,7 @@ Note Application with Django and ReactJS
 
 ## FONCTIONNALITE
 
-[] Création d'une catégorie  
+[*] Création d'une catégorie  
 [] Modification et suppression catégorie  
 [*] Enrégistrement d'une note ou d'une tâche  
 [*] Mise à jour d'une note  
