@@ -6,12 +6,11 @@ import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 
 import Home from "./views/Home";
-import Note from "./views/Note";
 import ErrorPage from "./views/ErrorPage";
 
-import Dashboard from "./components/dashboard/Dashboard";
 import NotesGrid from "./components/notes/NotesGrid";
-import CategoriesGrid from "./components/categories/CategoriesGrid";
+import Note from "./components/notes/Note";
+import Category from "./components/categories/Category";
 
 const queryClient = new QueryClient();
 
@@ -23,12 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Dashboard />,
-        errorElement: <ErrorPage />,
-      },
-      {
-        path: "categories/",
-        element: <CategoriesGrid />,
+        element: <Category />,
         errorElement: <ErrorPage />,
       },
       {

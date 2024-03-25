@@ -4,7 +4,7 @@ class Utils:
 
     def _list(model, model_serializer, param) -> Response:
 
-        elements = model.objects.all().filter(user = param).order_by('-updated_at')
+        elements = model.objects.all().order_by('-updated_at')
 
         serializer = model_serializer(elements, many = True)
 

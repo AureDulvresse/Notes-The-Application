@@ -6,19 +6,13 @@ const Home = () => {
       <nav className="flex items-center gap-4 mb-3">
         <Link
           to={""}
-          className="text-slate-700 dark:text-slate-200 font-normal hover:text-orange-400  active:text-orange-500 active:font-normal"
-        >
-          Tableau de bord
-        </Link>
-        <Link
-          to={"categories/"}
-          className="text-slate-700 dark:text-slate-200 font-normal hover:text-orange-400  active:text-orange-500 active:font-normal"
+          className="text-slate-700 dark:text-slate-200 text-[20px] border px-3 py-2 rounded-md font-normal hover:text-orange-400  active:text-orange-500 active:font-normal"
         >
           Category
         </Link>
         <Link
           to={"notes/"}
-          className="text-slate-700 dark:text-slate-200 font-normal hover:text-orange-400  active:text-orange-500 active:font-normal"
+          className="text-slate-700 dark:text-slate-200 text-[20px] border px-4 py-2 rounded-md font-normal hover:text-orange-400  active:text-orange-500 active:font-normal"
         >
           Notes
         </Link>

@@ -305,7 +305,7 @@
         "kind": 5,
         "importPath": "backend.apps.urls",
         "description": "backend.apps.urls",
-        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n    path('categories/<str:id_user>', views.CategoryViews, name=\"Categories\"),\n]",
+        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n    path('categories/', views.CategoryViews, name=\"Categories\"),\n    path('categories/<str:pk>', views.CategoryViews, name=\"Categories\"),\n]",
         "detail": "backend.apps.urls",
         "documentation": {}
     },
@@ -314,7 +314,7 @@
         "kind": 5,
         "importPath": "backend.apps.urls",
         "description": "backend.apps.urls",
-        "peekOfCode": "urlpatterns = [\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n    path('categories/<str:id_user>', views.CategoryViews, name=\"Categories\"),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n    path('categories/', views.CategoryViews, name=\"Categories\"),\n    path('categories/<str:pk>', views.CategoryViews, name=\"Categories\"),\n]",
         "detail": "backend.apps.urls",
         "documentation": {}
     },
@@ -323,7 +323,7 @@
         "kind": 6,
         "importPath": "backend.apps.utils",
         "description": "backend.apps.utils",
-        "peekOfCode": "class Utils:\n    def _list(model, model_serializer, param) -> Response:\n        elements = model.objects.all().filter(user = param).order_by('-updated_at')\n        serializer = model_serializer(elements, many = True)\n        return Response(serializer.data)\n    def _get(model, model_serializer, param) -> Response:\n        element = model.objects.get(uuid = param)\n        serializer = model_serializer(element, many = False)\n        return Response(serializer.data)",
+        "peekOfCode": "class Utils:\n    def _list(model, model_serializer, param) -> Response:\n        elements = model.objects.all().order_by('-updated_at')\n        serializer = model_serializer(elements, many = True)\n        return Response(serializer.data)\n    def _get(model, model_serializer, param) -> Response:\n        element = model.objects.get(uuid = param)\n        serializer = model_serializer(element, many = False)\n        return Response(serializer.data)",
         "detail": "backend.apps.utils",
         "documentation": {}
     },

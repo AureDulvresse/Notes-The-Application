@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import since from "since-time-ago";
 
 import { BiArrowBack, BiCheck, BiTrashAlt, BiX } from "react-icons/bi";
-import NoteLoader2 from "./../components/notes/NoteLoader2";
+import NoteLoader2 from "./NoteLoader2";
 
 const Note = () => {
   const { id } = useParams(["id"]);
@@ -43,14 +43,12 @@ const Note = () => {
     queryKey: queryKey[1],
     queryFn: async () =>
       await axios
-        .get("http://127.0.0.1:8000/api/categories/1")
+        .get("http://127.0.0.1:8000/api/categories/")
         .then((res) => res.data),
   });
 
   const note = data || "";
   const categories = cats || [];
-
-  const currentUser = "1";
 
   const updateNote = useMutation({
     mutationFn: async () => {
@@ -59,7 +57,6 @@ const Note = () => {
         description: currentNoteDescription,
         category: currentNoteCategory,
         status: currentNoteStatus,
-        user: currentUser,
       };
       await axios.put(
         "http://localhost:8000/api/notes/".concat(note.uuid),

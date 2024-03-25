@@ -18,28 +18,26 @@ const NotesGrid = () => {
 
   const [search, setSearch] = useState("");
 
-  const user_id = 1;
-
   const queryClient = useQueryClient();
   const queryKey = [["notes"], ["categories"]];
   const { isLoading, error, data } = useQuery({
     queryKey: queryKey[0],
     queryFn: async () =>
       await axios
-        .get("http://127.0.0.1:8000/api/notes/1")
+        .get("http://127.0.0.1:8000/api/notes/")
         .then((res) => res.data),
   });
 
-  const { data: cats } = useQuery({
-    queryKey: queryKey[1],
-    queryFn: async () =>
-      await axios
-        .get("http://127.0.0.1:8000/api/categories/1")
-        .then((res) => res.data),
-  });
+  // const { data: cats } = useQuery({
+  //   queryKey: queryKey[1],
+  //   queryFn: async () =>
+  //     await axios
+  //       .get("http://127.0.0.1:8000/api/categories/")
+  //       .then((res) => res.data),
+  // });
 
   const notesList = data || [];
-  const categories = cats || [];
+  const categories = useQueryClient({ queryKey: ["categories"] }) || [];
 
   const addNote = useMutation({
     mutationFn: async () => {
@@ -47,7 +45,6 @@ const NotesGrid = () => {
         content: newNote,
         description: newNoteDescription,
         category: newNoteCategory,
-        user: user_id,
         is_task: is_task,
         bgColor: randomRgbaColor(),
       };
