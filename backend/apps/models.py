@@ -23,7 +23,6 @@ class Notes(models.Model):
     is_task = models.BooleanField(default = False)
     status = models.BooleanField(default = False)
     category = models.ForeignKey(Category, on_delete = models.CASCADE , related_name="fk_NoteCategory")
-    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name="fk_NoteUser")
     bgColor = models.CharField(max_length=40, default="rgb(249 115 22 / var(--tw-bg-opacity))")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now = True)

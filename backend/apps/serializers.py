@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import Category, Notes, User
+from .models import Category, Notes
 
 class CategorySerializer(ModelSerializer):
     
@@ -14,11 +14,4 @@ class NotesSerializer(ModelSerializer):
     class Meta:
         model = Notes
         fields = "__all__"
-
-class UserSerializer(ModelSerializer):
-    
-    class Meta:
-        model = User
-        fields = "__all__"
-
 

@@ -1,29 +1,11 @@
 [
     {
-        "label": "django.contrib.auth.models",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "django.contrib.auth.models",
-        "description": "django.contrib.auth.models",
-        "detail": "django.contrib.auth.models",
-        "documentation": {}
-    },
-    {
         "label": "django.db.models.deletion",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "django.db.models.deletion",
         "description": "django.db.models.deletion",
         "detail": "django.db.models.deletion",
-        "documentation": {}
-    },
-    {
-        "label": "django.utils.timezone",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "django.utils.timezone",
-        "description": "django.utils.timezone",
-        "detail": "django.utils.timezone",
         "documentation": {}
     },
     {
@@ -41,38 +23,6 @@
         "description": "shortuuid.django_fields",
         "isExtraImport": true,
         "detail": "shortuuid.django_fields",
-        "documentation": {}
-    },
-    {
-        "label": "settings",
-        "importPath": "django.conf",
-        "description": "django.conf",
-        "isExtraImport": true,
-        "detail": "django.conf",
-        "documentation": {}
-    },
-    {
-        "label": "settings",
-        "importPath": "django.conf",
-        "description": "django.conf",
-        "isExtraImport": true,
-        "detail": "django.conf",
-        "documentation": {}
-    },
-    {
-        "label": "migrations",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
-        "documentation": {}
-    },
-    {
-        "label": "models",
-        "importPath": "django.db",
-        "description": "django.db",
-        "isExtraImport": true,
-        "detail": "django.db",
         "documentation": {}
     },
     {
@@ -221,6 +171,14 @@
         "documentation": {}
     },
     {
+        "label": "settings",
+        "importPath": "django.conf",
+        "description": "django.conf",
+        "isExtraImport": true,
+        "detail": "django.conf",
+        "documentation": {}
+    },
+    {
         "label": "static",
         "importPath": "django.conf.urls.static",
         "description": "django.conf.urls.static",
@@ -275,17 +233,8 @@
         "kind": 6,
         "importPath": "backend.apps.migrations.0001_initial",
         "description": "backend.apps.migrations.0001_initial",
-        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n        ('auth', '0012_alter_user_first_name_max_length'),\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='User',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),",
+        "peekOfCode": "class Migration(migrations.Migration):\n    initial = True\n    dependencies = [\n    ]\n    operations = [\n        migrations.CreateModel(\n            name='Category',\n            fields=[\n                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),\n                ('uuid', shortuuid.django_fields.ShortUUIDField(alphabet='abcdefgh12345678', length=10, max_length=30, prefix='cat', unique=True)),",
         "detail": "backend.apps.migrations.0001_initial",
-        "documentation": {}
-    },
-    {
-        "label": "Migration",
-        "kind": 6,
-        "importPath": "backend.apps.migrations.0002_alter_notes_bgcolor",
-        "description": "backend.apps.migrations.0002_alter_notes_bgcolor",
-        "peekOfCode": "class Migration(migrations.Migration):\n    dependencies = [\n        ('apps', '0001_initial'),\n    ]\n    operations = [\n        migrations.AlterField(\n            model_name='notes',\n            name='bgColor',\n            field=models.CharField(default='rgb(249 115 22 / var(--tw-bg-opacity))', max_length=40),\n        ),",
-        "detail": "backend.apps.migrations.0002_alter_notes_bgcolor",
         "documentation": {}
     },
     {
@@ -293,7 +242,7 @@
         "kind": 6,
         "importPath": "backend.apps.admin",
         "description": "backend.apps.admin",
-        "peekOfCode": "class CategoryAdmin(admin.ModelAdmin):\n    pass\n@admin.register(Notes)\nclass NotesAdmin(admin.ModelAdmin):\n       pass\n@admin.register(User)\nclass UserAdmin(admin.ModelAdmin):\n    pass",
+        "peekOfCode": "class CategoryAdmin(admin.ModelAdmin):\n    pass\n@admin.register(Notes)\nclass NotesAdmin(admin.ModelAdmin):\n       pass",
         "detail": "backend.apps.admin",
         "documentation": {}
     },
@@ -302,16 +251,7 @@
         "kind": 6,
         "importPath": "backend.apps.admin",
         "description": "backend.apps.admin",
-        "peekOfCode": "class NotesAdmin(admin.ModelAdmin):\n       pass\n@admin.register(User)\nclass UserAdmin(admin.ModelAdmin):\n    pass",
-        "detail": "backend.apps.admin",
-        "documentation": {}
-    },
-    {
-        "label": "UserAdmin",
-        "kind": 6,
-        "importPath": "backend.apps.admin",
-        "description": "backend.apps.admin",
-        "peekOfCode": "class UserAdmin(admin.ModelAdmin):\n    pass",
+        "peekOfCode": "class NotesAdmin(admin.ModelAdmin):\n       pass",
         "detail": "backend.apps.admin",
         "documentation": {}
     },
@@ -338,7 +278,7 @@
         "kind": 6,
         "importPath": "backend.apps.models",
         "description": "backend.apps.models",
-        "peekOfCode": "class Notes(models.Model):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='note' , alphabet='abcdefgh12345678')\n    content = models.TextField(max_length=1000)\n    description = models.TextField(null = True, blank = True)\n    is_task = models.BooleanField(default = False)\n    status = models.BooleanField(default = False)\n    category = models.ForeignKey(Category, on_delete = models.CASCADE , related_name=\"fk_NoteCategory\")\n    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name=\"fk_NoteUser\")\n    bgColor = models.CharField(max_length=40, default=\"rgb(249 115 22 / var(--tw-bg-opacity))\")\n    created_at = models.DateTimeField(auto_now_add=True)",
+        "peekOfCode": "class Notes(models.Model):\n    uuid = ShortUUIDField(unique=True , length=10, max_length=30 , prefix='note' , alphabet='abcdefgh12345678')\n    content = models.TextField(max_length=1000)\n    description = models.TextField(null = True, blank = True)\n    is_task = models.BooleanField(default = False)\n    status = models.BooleanField(default = False)\n    category = models.ForeignKey(Category, on_delete = models.CASCADE , related_name=\"fk_NoteCategory\")\n    bgColor = models.CharField(max_length=40, default=\"rgb(249 115 22 / var(--tw-bg-opacity))\")\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now = True)",
         "detail": "backend.apps.models",
         "documentation": {}
     },
@@ -347,7 +287,7 @@
         "kind": 6,
         "importPath": "backend.apps.serializers",
         "description": "backend.apps.serializers",
-        "peekOfCode": "class CategorySerializer(ModelSerializer):\n    class Meta:\n        model = Category\n        fields = \"__all__\"\nclass NotesSerializer(ModelSerializer):\n    class Meta:\n        model = Notes\n        fields = \"__all__\"\nclass UserSerializer(ModelSerializer):\n    class Meta:",
+        "peekOfCode": "class CategorySerializer(ModelSerializer):\n    class Meta:\n        model = Category\n        fields = \"__all__\"\nclass NotesSerializer(ModelSerializer):\n    class Meta:\n        model = Notes\n        fields = \"__all__\"",
         "detail": "backend.apps.serializers",
         "documentation": {}
     },
@@ -356,16 +296,7 @@
         "kind": 6,
         "importPath": "backend.apps.serializers",
         "description": "backend.apps.serializers",
-        "peekOfCode": "class NotesSerializer(ModelSerializer):\n    class Meta:\n        model = Notes\n        fields = \"__all__\"\nclass UserSerializer(ModelSerializer):\n    class Meta:\n        model = User\n        fields = \"__all__\"",
-        "detail": "backend.apps.serializers",
-        "documentation": {}
-    },
-    {
-        "label": "UserSerializer",
-        "kind": 6,
-        "importPath": "backend.apps.serializers",
-        "description": "backend.apps.serializers",
-        "peekOfCode": "class UserSerializer(ModelSerializer):\n    class Meta:\n        model = User\n        fields = \"__all__\"",
+        "peekOfCode": "class NotesSerializer(ModelSerializer):\n    class Meta:\n        model = Notes\n        fields = \"__all__\"",
         "detail": "backend.apps.serializers",
         "documentation": {}
     },
@@ -374,7 +305,7 @@
         "kind": 5,
         "importPath": "backend.apps.urls",
         "description": "backend.apps.urls",
-        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n    path('statistiques/<str:id_user>', views.StatistiquesViews, name=\"Statistiques\"),\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n    path('categories/<str:id_user>', views.CategoryViews, name=\"Categories\"),\n]",
+        "peekOfCode": "app_name = 'api'\nurlpatterns = [\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n    path('categories/<str:id_user>', views.CategoryViews, name=\"Categories\"),\n]",
         "detail": "backend.apps.urls",
         "documentation": {}
     },
@@ -383,7 +314,7 @@
         "kind": 5,
         "importPath": "backend.apps.urls",
         "description": "backend.apps.urls",
-        "peekOfCode": "urlpatterns = [\n    path('statistiques/<str:id_user>', views.StatistiquesViews, name=\"Statistiques\"),\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n    path('categories/<str:id_user>', views.CategoryViews, name=\"Categories\"),\n]",
+        "peekOfCode": "urlpatterns = [\n    path('notes/', views.NotesViews, name='Notes'),\n    path('notes/<str:pk>', views.NotesViews, name=\"Notes\"),\n    path('categories/<str:id_user>', views.CategoryViews, name=\"Categories\"),\n]",
         "detail": "backend.apps.urls",
         "documentation": {}
     },
@@ -397,20 +328,11 @@
         "documentation": {}
     },
     {
-        "label": "StatistiquesViews",
-        "kind": 2,
-        "importPath": "backend.apps.views",
-        "description": "backend.apps.views",
-        "peekOfCode": "def StatistiquesViews(request, id_user):\n    nb_categories = Category.objects.all().filter(user = id_user).count()\n    nb_notes = Notes.objects.all().filter(user = id_user).count()\n    nb_tasks_done = Notes.objects.all().filter(user = id_user, status = True).count()\n    dataset = [\n        {\n            'id': 1,\n            'libelle': \"Category\",\n            'data': nb_categories\n        },",
-        "detail": "backend.apps.views",
-        "documentation": {}
-    },
-    {
         "label": "CategoryViews",
         "kind": 2,
         "importPath": "backend.apps.views",
         "description": "backend.apps.views",
-        "peekOfCode": "def CategoryViews(request, id_user) -> Response:\n    if request.method == \"GET\":\n        categories = Category.objects.all().filter(user = id_user)\n        serializer = CategorySerializer(categories, many = True)\n        return Response(serializer.data)\n    if request.method == \"POST\":\n        data = request.data\n        new_category = Category.objects.create(\n            title = data['title'],\n            description = data['description'],",
+        "peekOfCode": "def CategoryViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        categories = Category.objects.all()\n        serializer = CategorySerializer(categories, many = True)\n        return Response(serializer.data)\n    if request.method == \"POST\":\n        data = request.data\n        new_category = Category.objects.create(\n            title = data['title'],\n            description = data['description'],",
         "detail": "backend.apps.views",
         "documentation": {}
     },
@@ -419,7 +341,7 @@
         "kind": 2,
         "importPath": "backend.apps.views",
         "description": "backend.apps.views",
-        "peekOfCode": "def NotesViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if pk.isdigit():\n            return Utils._list(Notes, NotesSerializer, pk)\n        else:\n            return Utils._get(Notes, NotesSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        cat = Category.objects.get(id = data['category'])\n        user = User.objects.get(id =  data['user'])",
+        "peekOfCode": "def NotesViews(request, pk = None) -> Response:\n    if request.method == \"GET\":\n        if pk.isdigit():\n            return Utils._list(Notes, NotesSerializer, pk)\n        else:\n            return Utils._get(Notes, NotesSerializer, pk)\n    elif request.method == \"POST\":\n        data = request.data\n        cat = Category.objects.get(id = data['category'])\n        if data['is_task']:",
         "detail": "backend.apps.views",
         "documentation": {}
     },
@@ -509,7 +431,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "WSGI_APPLICATION = 'backend.wsgi.application'\nCORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_ALL_HEADERS = True\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\nAUTH_USER_MODEL = 'apps.User'",
+        "peekOfCode": "WSGI_APPLICATION = 'backend.wsgi.application'\nCORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_ALL_HEADERS = True\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n# Password validation",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -518,7 +440,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "CORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_ALL_HEADERS = True\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\nAUTH_USER_MODEL = 'apps.User'\n# Password validation",
+        "peekOfCode": "CORS_ALLOW_ALL_ORIGINS = True\nCORS_ALLOW_ALL_HEADERS = True\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n# Password validation\n# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -527,7 +449,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "CORS_ALLOW_ALL_HEADERS = True\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\nAUTH_USER_MODEL = 'apps.User'\n# Password validation\n# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators",
+        "peekOfCode": "CORS_ALLOW_ALL_HEADERS = True\nDATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n# Password validation\n# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [",
         "detail": "backend.backend.settings",
         "documentation": {}
     },
@@ -536,16 +458,7 @@
         "kind": 5,
         "importPath": "backend.backend.settings",
         "description": "backend.backend.settings",
-        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\nAUTH_USER_MODEL = 'apps.User'\n# Password validation\n# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [",
-        "detail": "backend.backend.settings",
-        "documentation": {}
-    },
-    {
-        "label": "AUTH_USER_MODEL",
-        "kind": 5,
-        "importPath": "backend.backend.settings",
-        "description": "backend.backend.settings",
-        "peekOfCode": "AUTH_USER_MODEL = 'apps.User'\n# Password validation\n# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },",
+        "peekOfCode": "DATABASES = {\n    'default': {\n        'ENGINE': 'django.db.backends.sqlite3',\n        'NAME': BASE_DIR / 'db.sqlite3',\n    }\n}\n# Password validation\n# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators\nAUTH_PASSWORD_VALIDATORS = [\n    {",
         "detail": "backend.backend.settings",
         "documentation": {}
     },

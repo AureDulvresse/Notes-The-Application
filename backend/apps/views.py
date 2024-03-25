@@ -1,53 +1,17 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .models import Category, Notes, User
-from .serializers import CategorySerializer, NotesSerializer, UserSerializer
+from .models import Category, Notes
+from .serializers import CategorySerializer, NotesSerializer
 
 from .utils import Utils
 
 # Create your views here.
-
-@api_view(['GET'])
-def StatistiquesViews(request, id_user):
-    
-    nb_categories = Category.objects.all().filter(user = id_user).count()
-    nb_notes = Notes.objects.all().filter(user = id_user).count()
-    nb_tasks_done = Notes.objects.all().filter(user = id_user, status = True).count()
-    
-    dataset = [
-        {
-            'id': 1,
-            'libelle': "Category",
-            'data': nb_categories
-        },
-        {   
-            'id': 2,
-               'libelle': "Notes",
-            'data': nb_notes,
-        },
-        {
-            'id': 3,
-               'libelle': "Accomplie",
-            'data': nb_tasks_done,
-        }
-    ]
-
-    data = {
-        'nb_categories': nb_categories,
-        'nb_notes': nb_notes,
-        'tasks_completed': nb_tasks_done,
-        'dataset': dataset,
-    }
-
-    return Response(data)
-
-
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
-def CategoryViews(request, id_user) -> Response:
+def CategoryViews(request, pk = None) -> Response:
 
     if request.method == "GET":
-        categories = Category.objects.all().filter(user = id_user)
+        categories = Category.objects.all()
 
         serializer = CategorySerializer(categories, many = True)
 
@@ -60,7 +24,6 @@ def CategoryViews(request, id_user) -> Response:
             title = data['title'],
             description = data['description'],
             thumbnail = data['thumbnail'],
-            user = data['user'],
         )
         
         serializer = CategorySerializer(new_category, many = False)
@@ -89,20 +52,17 @@ def NotesViews(request, pk = None) -> Response:
         data = request.data
 
         cat = Category.objects.get(id = data['category'])
-        user = User.objects.get(id =  data['user'])
         
         if data['is_task']:
             new_note = Notes.objects.create(
                 content = data['content'],
                 is_task = data['is_task'],
                 category = cat,
-                user = user,
             )
         else:
             new_note = Notes.objects.create(
                 content = data['content'],
                 category = cat,
-                user = user,
             )
         
         if not data['description'] == "":
