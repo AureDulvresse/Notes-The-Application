@@ -14,6 +14,8 @@ const Category = () => {
   const [newCategory, setNewCategory] = useState("");
   const [newCategoryDescription, setNewCategoryDescription] = useState("");
 
+  const [categoryToRemove, setCategoryToRemove] = useState(1);
+
   const queryClient = useQueryClient();
   const queryKey = ["categories"];
 
@@ -66,16 +68,14 @@ const Category = () => {
     },
   });
 
-  const addCategory = useMutation({
+  const removeCategory = useMutation({
     mutationFn: async () => {
-      const data = {
-        title: newCategory,
-        description: newCategoryDescription,
-      };
-      await axios.post("http://127.0.0.1:8000/api/categories/", data);
+      await axios.delete(
+        "http://127.0.0.1:8000/api/categories/".concat(categoryToRemove)
+      );
     },
     onSuccess: () => {
-      toast.success("Category enregistrée avec succès", {
+      toast.success("Category supprimée avec succès", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -187,20 +187,28 @@ const Category = () => {
           <div className="max-h-[300px] overflow-x-hidden flex flex-col gap-4">
             {categories.map((category, index) => {
               return (
-                <Link
-                  to={"category/".concat(category.uuid) + "/show"}
+                <div
                   key={index}
-                  className="flex items-center justify-between shadow-md rounded-md px-2 py-4 text-dark border dark:text-slate-300 hover:bg-orange-300 hover:text-light hover:dark:text-light leading-3 cursor-pointer"
+                  className="flex items-center shadow-md rounded-md px-2 text-dark border dark:text-slate-300 hover:bg-orange-300 hover:text-light hover:dark:text-light leading-3 cursor-pointer"
                 >
-                  <span className="font-semibold">{category.title}</span>
+                  <Link
+                    to={"category/".concat(category.uuid) + "/show"}
+                    className="font-semibold w-[90%] h-full py-4"
+                  >
+                    {category.title}
+                  </Link>
+
                   <button
                     type="button"
                     className="hover:bg-red-400 px-2 py-2 text-center text-red-500 hover:text-white rounded-md shadow-sm"
-                    onClick={() => removeCategory(category.id)}
+                    onClick={() => {
+                      setCategoryToRemove(category.id);
+                      removeCategory.mutate();
+                    }}
                   >
                     <BiTrash />
                   </button>
-                </Link>
+                </div>
               );
             })}
           </div>
