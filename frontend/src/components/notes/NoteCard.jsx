@@ -12,7 +12,7 @@ const NoteCard = ({ note }) => {
           className="px-4 flex-wrap py-2 shadow-md rounded-md h-[200px] relative"
           style={{ backgroundColor: note.bgColor }}
         >
-          <h3 className="text-white font-bold">{note.content}</h3>
+          <h3 className="text-white font-bold line-clamp-4">{note.content}</h3>
           <p className="text-slate-100 font-light leading-[21px] italic line-clamp-2">
             {note.description}
           </p>
