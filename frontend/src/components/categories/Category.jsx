@@ -1,13 +1,14 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 import "react-toastify/dist/ReactToastify.css";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 
+import { BiTrash } from "react-icons/bi";
+
 import NoteLoader from "../notes/NoteLoader";
-import { Link } from "react-router-dom";
 
 const Category = () => {
   const [newCategory, setNewCategory] = useState("");
@@ -25,6 +26,45 @@ const Category = () => {
   });
 
   const categories = data || [];
+
+  const addCategory = useMutation({
+    mutationFn: async () => {
+      const data = {
+        title: newCategory,
+        description: newCategoryDescription,
+      };
+      await axios.post("http://127.0.0.1:8000/api/categories/", data);
+    },
+    onSuccess: () => {
+      toast.success("Category enregistrée avec succès", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+      setNewCategory("");
+      setNewCategoryDescription("");
+      queryClient.invalidateQueries({ queryKey: queryKey });
+    },
+    onError: () => {
+      toast.error("Une erreur s'est produite", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    },
+  });
 
   const addCategory = useMutation({
     mutationFn: async () => {
@@ -150,9 +190,16 @@ const Category = () => {
                 <Link
                   to={"category/".concat(category.uuid) + "/show"}
                   key={index}
-                  className="shadow-md rounded-md px-2 py-4 text-dark border dark:text-slate-300 hover:bg-orange-300 hover:text-light hover:dark:text-light leading-3 cursor-pointer"
+                  className="flex items-center justify-between shadow-md rounded-md px-2 py-4 text-dark border dark:text-slate-300 hover:bg-orange-300 hover:text-light hover:dark:text-light leading-3 cursor-pointer"
                 >
-                  {category.title}
+                  <span className="font-semibold">{category.title}</span>
+                  <button
+                    type="button"
+                    className="hover:bg-red-400 px-2 py-2 text-center text-red-500 hover:text-white rounded-md shadow-sm"
+                    onClick={() => removeCategory(category.id)}
+                  >
+                    <BiTrash />
+                  </button>
                 </Link>
               );
             })}

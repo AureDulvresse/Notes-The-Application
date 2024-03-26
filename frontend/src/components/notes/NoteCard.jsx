@@ -9,11 +9,11 @@ const NoteCard = ({ note }) => {
     <>
       <Link to={note.uuid + "/show"} className="">
         <div
-          className="px-4 flex-wrap py-2 shadow-md rounded-md h-[180px] relative"
+          className="px-4 flex-wrap py-2 shadow-md rounded-md h-[200px] relative"
           style={{ backgroundColor: note.bgColor }}
         >
           <h3 className="text-white font-bold">{note.content}</h3>
-          <p className="text-slate-100 font-light leading-[21px] italic line-clamp-4">
+          <p className="text-slate-100 font-light leading-[21px] italic line-clamp-2">
             {note.description}
           </p>
           <div className="mt-3 flex items-center justify-between gap-3 absolute bottom-4">
