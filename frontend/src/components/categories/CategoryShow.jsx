@@ -22,7 +22,7 @@ const CategoryShow = () => {
   const [updateDate, setUpdateDate] = useState("");
 
   const queryClient = useQueryClient();
-  const queryKey = ["categories"];
+  const queryKey = ["category"];
   const { isLoading, error, data } = useQuery({
     queryKey: queryKey,
     queryFn: async () =>
@@ -30,7 +30,7 @@ const CategoryShow = () => {
         .get("http://127.0.0.1:8000/api/categories/".concat(id))
         .then((res) => {
           let data = res.data;
-          setCurrentCategory(data.content);
+          setCurrentCategory(data.title);
           setCurrentCategoryDescription(data.description);
           setUpdateDate(since(new Date(data.updated_at)));
           return data;
@@ -46,7 +46,7 @@ const CategoryShow = () => {
         description: currentCategoryDescription,
       };
       await axios.put(
-        "http://localhost:8000/api/notes/".concat(category.uuid),
+        "http://localhost:8000/api/categories/".concat(category.uuid),
         data
       );
     },
@@ -93,7 +93,7 @@ const CategoryShow = () => {
     <div>
       <ToastContainer />
       <Link
-        to=""
+        to="/"
         className="mt-3 ml-[155px] flex items-center justify-center gap-3 rounded-md bg-slate-600 dark:bg-slate-200 py-2.5 w-20 text-sm font-semibold text-white dark:text-black shadow-sm hover:bg-slate-600 dark:hover:bg-slate-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 dark:focus-visible:outline-slate-100"
       >
         <BiArrowBack />
