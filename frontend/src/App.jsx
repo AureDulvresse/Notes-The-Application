@@ -39,7 +39,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "category/:id/show",
+    path: "categories/:id/show",
     element: <CategoryShow />,
     errorElement: <ErrorPage />,
   },

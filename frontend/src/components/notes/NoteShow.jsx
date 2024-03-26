@@ -16,10 +16,10 @@ const NoteShow = () => {
   const navigate = useNavigate();
 
   const [currentNote, setCurrentNote] = useState("");
-  const [updateDate, setUpdateDate] = useState("");
   const [currentNoteDescription, setCurrentNoteDescription] = useState("");
   const [currentNoteCategory, setCurrentNoteCategory] = useState("1");
   const [currentNoteStatus, setCurrentNoteStatus] = useState(false);
+  const [updateDate, setUpdateDate] = useState("");
 
   const queryClient = useQueryClient();
   const queryKey = [["note"], ["categories"]];

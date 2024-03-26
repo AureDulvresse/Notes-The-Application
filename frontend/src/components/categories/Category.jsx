@@ -192,7 +192,7 @@ const Category = () => {
                   className="flex items-center shadow-md rounded-md px-2 text-dark border dark:text-slate-300 hover:bg-orange-300 hover:text-light hover:dark:text-light leading-3 cursor-pointer"
                 >
                   <Link
-                    to={"category/".concat(category.uuid) + "/show"}
+                    to={"categories/".concat(category.uuid) + "/show"}
                     className="font-semibold w-[90%] h-full py-4"
                   >
                     {category.title}
