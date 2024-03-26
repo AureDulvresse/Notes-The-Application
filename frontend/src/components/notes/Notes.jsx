@@ -10,6 +10,10 @@ import { randomRgbaColor } from "../..";
 import NoteCard from "./NoteCard";
 import NoteLoader from "./NoteLoader";
 
+import { BiSolidFilePdf } from "react-icons/bi";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import NoteTemplatePDF from "../layout/NoteTemplatePDF";
+
 const Notes = () => {
   const [newNote, setNewNote] = useState("");
   const [newNoteDescription, setNewNoteDescription] = useState("");
@@ -103,13 +107,45 @@ const Notes = () => {
     <div>
       <ToastContainer />
 
-      <input
-        type="text"
-        className="px-3 py-1 w-[300px] border-[0.8px] text-slate-700 dark:text-slate-100 border-slate-300 dark:border-slate-500 outline-none rounded-md hover:border-orange-400 focus:border-[1.2px] focus:border-orange-500 placeholder:text-slate-200 dark:placeholder:text-slate-500  bg-white dark:bg-gray-700"
-        placeholder="Recherche..."
-        value={search}
-        onChange={(event) => setSearch(event.target.value)}
-      />
+      <div className="flex justify-between items-center">
+        <input
+          type="text"
+          className="px-3 py-1 w-[300px] border-[0.8px] text-slate-700 dark:text-slate-100 border-slate-300 dark:border-slate-500 outline-none rounded-md hover:border-orange-400 focus:border-[1.2px] focus:border-orange-500 placeholder:text-slate-200 dark:placeholder:text-slate-500  bg-white dark:bg-gray-700"
+          placeholder="Recherche..."
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+        />
+        <PDFDownloadLink
+          document={<NoteTemplatePDF />}
+          fileName="Liste des notes"
+          className="bg-orange-500 hover:bg-orange-300 px-2 py-2 rounded-md shadow-sm text-white hover:text-slate-700 flex items-center"
+        >
+          <span className="font-semibold">
+            {(loading, error) => {
+              loading ? "Preparation du fichier..." : "Imprimer la liste";
+              error
+                ? toast.error(
+                    "Une erreur s'est produite lors du téléchargement",
+                    {
+                      position: "top-center",
+                      autoClose: 5000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      theme: "dark",
+                      transition: Bounce,
+                    }
+                  )
+                : "";
+            }}
+            Imprimer la liste
+          </span>
+          <BiSolidFilePdf className="text-[24px]" />
+        </PDFDownloadLink>
+      </div>
+
       <div className="flex flex-col md:grid md:grid-cols-4 gap-4 mt-4">
         {notesList
           .filter((note) => {
@@ -195,7 +231,7 @@ const Notes = () => {
                 : addNote.mutate();
             }}
           >
-            Save
+            Enregistrer
           </button>
         </div>
       </form>

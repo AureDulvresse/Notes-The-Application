@@ -178,7 +178,7 @@ const Category = () => {
                   : addCategory.mutate();
               }}
             >
-              Save
+              Enregistrer
             </button>
           </div>
         </div>
