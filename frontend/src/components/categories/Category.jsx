@@ -16,6 +16,8 @@ const Category = () => {
 
   const [categoryToRemove, setCategoryToRemove] = useState(1);
 
+  const [search, setSearch] = useState("");
+
   const queryClient = useQueryClient();
   const queryKey = ["categories"];
 
@@ -181,36 +183,52 @@ const Category = () => {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <h3 className="text-[20px] text-orange-500">
-            Liste de vos catégories
-          </h3>
-          <div className="max-h-[300px] overflow-x-hidden flex flex-col gap-4">
-            {categories.map((category, index) => {
-              return (
-                <div
-                  key={index}
-                  className="flex items-center shadow-md rounded-md px-2 text-dark border dark:text-slate-300 hover:bg-orange-300 hover:text-slate-700 hover:dark:text-light leading-3 cursor-pointer"
-                >
-                  <Link
-                    to={"categories/".concat(category.uuid) + "/show"}
-                    className="font-semibold w-[90%] h-full py-4"
-                  >
-                    {category.title}
-                  </Link>
+          <div className="flex items-center justify-between gap-2">
+            <h3 className="text-[18px] text-orange-500">
+              Liste de vos catégories
+            </h3>
+            <input
+              type="text"
+              className="px-3 py-1 w-[250px] border-[0.8px] text-slate-700 dark:text-slate-100 border-slate-300 dark:border-slate-500 outline-none rounded-md hover:border-orange-400 focus:border-[1.2px] focus:border-orange-500 placeholder:text-slate-200 dark:placeholder:text-slate-500  bg-white dark:bg-gray-700"
+              placeholder="Recherche..."
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+            />
+          </div>
 
-                  <button
-                    type="button"
-                    className="hover:bg-red-400 px-2 py-2 text-center text-red-500 hover:text-white rounded-md shadow-sm"
-                    onClick={() => {
-                      setCategoryToRemove(category.id);
-                      removeCategory.mutate();
-                    }}
+          <div className="max-h-[300px] overflow-x-hidden flex flex-col gap-4">
+            {categories
+              .filter((category) => {
+                return search.toLowerCase() === ""
+                  ? category
+                  : category.title.toLowerCase().includes(search);
+              })
+              .map((category, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center shadow-md rounded-md px-2 text-dark border dark:text-slate-300 hover:bg-orange-300 hover:text-slate-700 hover:dark:text-light leading-3 cursor-pointer"
                   >
-                    <BiTrash />
-                  </button>
-                </div>
-              );
-            })}
+                    <Link
+                      to={"categories/".concat(category.uuid) + "/show"}
+                      className="font-semibold w-[90%] h-full py-4"
+                    >
+                      {category.title}
+                    </Link>
+
+                    <button
+                      type="button"
+                      className="hover:bg-red-400 px-2 py-2 text-center text-red-500 hover:text-white rounded-md shadow-sm"
+                      onClick={() => {
+                        setCategoryToRemove(category.id);
+                        removeCategory.mutate();
+                      }}
+                    >
+                      <BiTrash />
+                    </button>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>

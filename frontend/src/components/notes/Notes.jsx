@@ -115,7 +115,8 @@ const Notes = () => {
           .filter((note) => {
             return search.toLowerCase() === ""
               ? note
-              : note.content.toLowerCase().includes(search);
+              : note.content.toLowerCase().includes(search) ||
+                  note.description.toLowerCase().includes(search);
           })
           .map((note, index) => {
             return <NoteCard note={note} key={index} />;
