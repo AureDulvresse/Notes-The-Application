@@ -137,7 +137,7 @@ const Category = () => {
             </p>
             <input
               type="text"
-              className="px-3 py-1 w-[300px] border-[0.8px] text-slate-700 dark:text-slate-100 border-slate-300 dark:border-slate-500 outline-none rounded-md hover:border-orange-400 focus:border-[1.2px] focus:border-orange-500 placeholder:text-slate-200 dark:placeholder:text-slate-500  bg-white dark:bg-gray-700"
+              className="px-3 py-1 w-[300px] border-[0.8px] border-slate-700 dark:border-slate-300 text-slate-700 dark:text-slate-300 outline-none rounded-md hover:border-orange-400 focus:border-[1.2px] focus:border-orange-500 placeholder:text-slate-200 dark:placeholder:text-slate-500  bg-white dark:bg-gray-700"
               placeholder="Entrer un titre"
               value={newCategory}
               onChange={(event) => setNewCategory(event.target.value)}
@@ -148,7 +148,7 @@ const Category = () => {
               Description:
             </p>
             <textarea
-              className="border-[0.4px] border-slate-700 dark:border-slate-300 outline-none rounded-md focus:border focus:border-slate-700 resize-none w-full h-[200px] px-3 py-2 text-slate-700 dark:text-slate-100 placeholder:text-slate-200 dark:placeholder:text-slate-500 bg-white dark:bg-gray-700"
+              className="border-[0.4px] border-slate-700 dark:border-slate-300 outline-none rounded-md hover:border-orange-400 focus:border-[1.2px] focus:border-orange-500 resize-none w-full h-[200px] px-3 py-2 text-slate-700 dark:text-slate-100 placeholder:text-slate-200 dark:placeholder:text-slate-500 bg-white dark:bg-gray-700"
               placeholder="Entrer une description (Facultatif)"
               value={newCategoryDescription}
               onChange={(event) =>
@@ -189,7 +189,7 @@ const Category = () => {
               return (
                 <div
                   key={index}
-                  className="flex items-center shadow-md rounded-md px-2 text-dark border dark:text-slate-300 hover:bg-orange-300 hover:text-light hover:dark:text-light leading-3 cursor-pointer"
+                  className="flex items-center shadow-md rounded-md px-2 text-dark border dark:text-slate-300 hover:bg-orange-300 hover:text-slate-700 hover:dark:text-light leading-3 cursor-pointer"
                 >
                   <Link
                     to={"categories/".concat(category.uuid) + "/show"}
