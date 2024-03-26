@@ -10,7 +10,7 @@ import { randomRgbaColor } from "../..";
 import NoteCard from "./NoteCard";
 import NoteLoader from "./NoteLoader";
 
-const NotesGrid = () => {
+const Notes = () => {
   const [newNote, setNewNote] = useState("");
   const [newNoteDescription, setNewNoteDescription] = useState("");
   const [newNoteCategory, setNewNoteCategory] = useState("1");
@@ -202,4 +202,4 @@ const NotesGrid = () => {
   );
 };
 
-export default NotesGrid;
+export default Notes;

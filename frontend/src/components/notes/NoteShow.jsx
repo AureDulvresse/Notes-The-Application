@@ -11,7 +11,7 @@ import since from "since-time-ago";
 import { BiArrowBack, BiCheck, BiTrashAlt, BiX } from "react-icons/bi";
 import NoteLoader2 from "./NoteLoader2";
 
-const Note = () => {
+const NoteShow = () => {
   const { id } = useParams(["id"]);
   const navigate = useNavigate();
 
@@ -260,4 +260,4 @@ const Note = () => {
   );
 };
 
-export default Note;
+export default NoteShow;

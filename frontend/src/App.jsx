@@ -8,9 +8,10 @@ import Footer from "./components/layout/Footer";
 import Home from "./views/Home";
 import ErrorPage from "./views/ErrorPage";
 
-import NotesGrid from "./components/notes/NotesGrid";
-import Note from "./components/notes/Note";
 import Category from "./components/categories/Category";
+import CategoryShow from "./components/categories/CategoryShow";
+import Notes from "./components/notes/Notes";
+import NoteShow from "./components/notes/NoteShow";
 
 const queryClient = new QueryClient();
 
@@ -26,20 +27,20 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
-        path: "category/:id/show",
-        element: <Category />,
-        errorElement: <ErrorPage />,
-      },
-      {
         path: "notes/",
-        element: <NotesGrid />,
+        element: <Notes />,
         errorElement: <ErrorPage />,
       },
     ],
   },
   {
     path: "notes/:id/show",
-    element: <Note />,
+    element: <NoteShow />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "category/:id/show",
+    element: <CategoryShow />,
     errorElement: <ErrorPage />,
   },
 ]);
